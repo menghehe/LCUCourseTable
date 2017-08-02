@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">聊大课表</string>
+    <string name="login_get">登陆</string>
+    <string name="add_course">添加课程</string>
+	<string name="edit_course">编辑</string>
+    <!-- String related to Login -->
+    <string name="title_activity_login">Login</string>
+    <string name="login_user_name_hint">教务系统账号</string>
+    <string name="login_user_name_password">密码</string>
+    <string name="login_yzm">点击图片可刷新验证码</string>
+    <string name="action_sign_in">登陆并获取课程表</string>
+
+    <string name="add_name">课程名称</string>
+    <string name="add_week">上课周(1-5)</string>
+    <string name="add_location">上课地点</string>
+    <string name="add_save">保存课程</string>
+	<string name="edit_span">课程节数</string>
+
+</resources>
