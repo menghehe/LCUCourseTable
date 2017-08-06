@@ -1,89 +1,99 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.bilibili.magicasakura.widgets.TintLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="site.imcu.lcus.AddActivity">
-
-    <LinearLayout
+    <include layout="@layout/toolbar"/>
+    <com.bilibili.magicasakura.widgets.TintLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
+            <com.bilibili.magicasakura.widgets.TintEditText
                 android:id="@+id/add_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/add_name" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
+                android:hint="@string/add_name"
+                android:inputType="text"
+                android:background="@drawable/ic_edit_text_default"
+                android:drawableLeft="@drawable/ic_person_outline_white_24dp"
+                android:drawablePadding="@dimen/padding_half"
+                android:maxLines="1"
+                android:padding="@dimen/padding_half"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textSize="13sp"
+                app:backgroundTint="@color/selector_focus"
+                app:drawableLeftTint="@color/selector_focus" />
+            <com.bilibili.magicasakura.widgets.TintEditText
                 android:id="@+id/add_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/add_location" />
+                android:hint="@string/add_location"
+                android:inputType="text"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:background="@drawable/ic_edit_text_default"
+                android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                android:drawablePadding="@dimen/padding_half"
+                android:padding="@dimen/padding_half"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textSize="13sp"
+                app:backgroundTint="@color/selector_focus"
+                app:drawableLeftTint="@color/selector_focus"/>
+        <android.support.v7.widget.CardView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.wx.wheelview.widget.WheelView
+                    android:id="@+id/chose_week"
+                    android:layout_width="60sp"
+                    android:layout_height="100sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="125sp"
+                    android:gravity="center_vertical"
+                    android:text="第"
+                    android:textSize="25sp"/>
+                <com.wx.wheelview.widget.WheelView
+                    android:id="@+id/chose_order"
+                    android:layout_width="60sp"
+                    android:layout_height="80sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="100sp"
+                    android:gravity="center_vertical"
+                    android:text="节至"
+                    android:textSize="25sp"/>
+                <com.wx.wheelview.widget.WheelView
+                    android:id="@+id/chose_span"
+                    android:layout_width="60sp"
+                    android:layout_height="80sp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <com.bilibili.magicasakura.widgets.TintButton
+                android:id="@+id/add_save"
+                style="?android:textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/theme_color_primary"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:text="@string/add_save"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-        </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.wx.wheelview.widget.WheelView
-            android:id="@+id/chose_week"
-            android:layout_width="80sp"
-            android:layout_height="100sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="125sp"
-            android:gravity="center_vertical"
-            android:text="第"
-            android:textSize="25sp"/>
-        <com.wx.wheelview.widget.WheelView
-            android:id="@+id/chose_order"
-            android:layout_width="60sp"
-            android:layout_height="80sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="100sp"
-            android:gravity="center_vertical"
-            android:text="节至"
-            android:textSize="25sp"/>
-        <com.wx.wheelview.widget.WheelView
-            android:id="@+id/chose_span"
-            android:layout_width="60sp"
-            android:layout_height="80sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="100sp"
-            android:gravity="center_vertical"
-            android:text="节"
-            android:textSize="25sp"/>
-    </LinearLayout>
-    <Button
-        android:id="@+id/add_save"
-        style="?android:textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
-        android:layout_marginTop="20dp"
-        android:padding="16dp"
-        android:text="@string/add_save"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-</LinearLayout>
+        </com.bilibili.magicasakura.widgets.TintLinearLayout>
+</com.bilibili.magicasakura.widgets.TintLinearLayout>

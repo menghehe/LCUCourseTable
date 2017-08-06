@@ -2,7 +2,7 @@
     <string name="app_name">聊大课表</string>
     <string name="login_get">登陆</string>
     <string name="add_course">添加课程</string>
-	<string name="edit_course">编辑</string>
+    <string name="edit_course">编辑</string>
     <!-- String related to Login -->
     <string name="title_activity_login">Login</string>
     <string name="login_user_name_hint">教务系统账号</string>
@@ -14,6 +14,15 @@
     <string name="add_week">上课周(1-5)</string>
     <string name="add_location">上课地点</string>
     <string name="add_save">保存课程</string>
-	<string name="edit_span">课程节数</string>
+    <string name="edit_span">课程节数</string>
 
+    <!-- String related to about -->
+    <string name="about_card2_title">感谢以下开源库</string>
+    <string name="eajy">Eajy/MaterialDesignDemo</string>
+    <string name="whuajian">WHuaJian/CourseTable</string>
+    <string name="jhy">jhy/jsoup</string>
+    <string name="litepal">LitePalFramework/LitePal</string>
+    <string name="venshine">venshine/WheelView</string>
+    <string name="square">square/okhttp</string>
+    <string name="about_card1_message">聊大课表——powered by SHIELD_7</string>
 </resources>

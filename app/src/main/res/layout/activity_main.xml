@@ -1,201 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-
-        xmlns:android="http://schemas.android.com/apk/res/android"
-
-        xmlns:tools="http://schemas.android.com/tools"
-
-        android:layout_width="match_parent"
-
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/toolbar" />
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-
-        android:animateLayoutChanges="true"
-
-        android:background="#F9F9F9"
-
-        android:orientation="vertical"
-
-        tools:context=".MainActivity">
-
-
+    <com.bilibili.magicasakura.widgets.TintLinearLayout
+        android:paddingTop="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-
-            android:id="@+id/weekNames"
-
             android:layout_width="match_parent"
 
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
 
-            android:orientation="horizontal"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
 
-            android:weightSum="7.8"/>
+            android:animateLayoutChanges="true"
 
+            android:background="#F9F9F9"
 
+            android:orientation="vertical"
 
-        <View
+            tools:context=".MainActivity">
 
-            android:layout_width="match_parent"
+            <LinearLayout
 
-            android:layout_height="1dp"
+                android:id="@+id/weekNames"
 
-            android:background="@drawable/divider"/>
+                android:layout_width="match_parent"
 
+                android:layout_height="30dp"
 
+                android:orientation="horizontal"
 
-        <com.cjj.MaterialRefreshLayout
+                android:weightSum="7.8"/>
 
-            android:id="@+id/mFreshLayout"
+            <View
 
-            app:overlay="true"
+                android:layout_width="match_parent"
 
-            app:wave_color="@color/transparent"
+                android:layout_height="1dp"
 
-            app:wave_height_type="higher"
+                android:background="@drawable/divider"/>
 
-            app:wave_show="true"
+            <com.cjj.MaterialRefreshLayout
 
-            android:layout_width="match_parent"
+                android:id="@+id/mFreshLayout"
 
-            android:layout_height="wrap_content">
+                app:overlay="true"
 
+                app:wave_color="@color/transparent"
 
+                app:wave_height_type="higher"
 
-            <ScrollView
+                app:wave_show="true"
 
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content">
 
 
-
-                <LinearLayout
+                <ScrollView
 
                     android:layout_width="match_parent"
 
-                    android:layout_height="wrap_content"
-
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
 
 
                     <LinearLayout
 
-                        android:id="@+id/sections"
-
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
 
                         android:layout_height="wrap_content"
 
-                        android:layout_weight="0.4"
-
-                        android:orientation="vertical"/>
+                        android:orientation="horizontal">
 
 
 
-                    <LinearLayout
+                        <LinearLayout
 
-                        android:id="@+id/weekPanel_1"
+                            android:id="@+id/sections"
 
-                        android:layout_width="0dp"
+                            android:layout_width="0dp"
 
-                        android:layout_height="wrap_content"
+                            android:layout_height="wrap_content"
 
-                        android:layout_weight="1"
+                            android:layout_weight="0.4"
 
-                        android:orientation="vertical"/>
-
-
-
-                    <LinearLayout
-
-                        android:id="@+id/weekPanel_2"
-
-                        android:layout_width="0dp"
-
-                        android:layout_height="wrap_content"
-
-                        android:layout_weight="1"
-
-                        android:orientation="vertical"/>
+                            android:orientation="vertical"/>
 
 
 
-                    <LinearLayout
+                        <LinearLayout
 
-                        android:id="@+id/weekPanel_3"
+                            android:id="@+id/weekPanel_1"
 
-                        android:layout_width="0dp"
+                            android:layout_width="0dp"
 
-                        android:layout_height="wrap_content"
+                            android:layout_height="wrap_content"
 
-                        android:layout_weight="1"
+                            android:layout_weight="1"
 
-                        android:orientation="vertical"/>
-
-
-
-                    <LinearLayout
-
-                        android:id="@+id/weekPanel_4"
-
-                        android:layout_width="0dp"
-
-                        android:layout_height="wrap_content"
-
-                        android:layout_weight="1"
-
-                        android:orientation="vertical"/>
+                            android:orientation="vertical"/>
 
 
 
-                    <LinearLayout
+                        <LinearLayout
 
-                        android:id="@+id/weekPanel_5"
+                            android:id="@+id/weekPanel_2"
 
-                        android:layout_width="0dp"
+                            android:layout_width="0dp"
 
-                        android:layout_height="wrap_content"
+                            android:layout_height="wrap_content"
 
-                        android:layout_weight="1"
+                            android:layout_weight="1"
 
-                        android:orientation="vertical"/>
-
-
-
-
-                </LinearLayout>
+                            android:orientation="vertical"/>
 
 
 
-            </ScrollView>
+                        <LinearLayout
 
-        </com.cjj.MaterialRefreshLayout>
+                            android:id="@+id/weekPanel_3"
+
+                            android:layout_width="0dp"
+
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1"
+
+                            android:orientation="vertical"/>
+
+
+
+                        <LinearLayout
+
+                            android:id="@+id/weekPanel_4"
+
+                            android:layout_width="0dp"
+
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1"
+
+                            android:orientation="vertical"/>
+
+
+
+                        <LinearLayout
+
+                            android:id="@+id/weekPanel_5"
+
+                            android:layout_width="0dp"
+
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1"
+
+                            android:orientation="vertical"/>
 
 
 
 
-    </LinearLayout>
-    <FrameLayout
+                    </LinearLayout>
+
+
+
+                </ScrollView>
+
+            </com.cjj.MaterialRefreshLayout>
+
+
+        </LinearLayout>
+    </com.bilibili.magicasakura.widgets.TintLinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:src="@drawable/ic_add_white_48dp"
-            android:elevation="16dp"
-            android:layout_margin="14dp" />
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu" />
 
 </android.support.v4.widget.DrawerLayout>

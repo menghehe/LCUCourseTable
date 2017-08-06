@@ -1,15 +1,23 @@
 package site.imcu.lcus;
 
+import android.app.ActivityManager;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +33,7 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        setToolBar();
         setWheelView();
         Button button = (Button)findViewById(R.id.add_save);
         button.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +43,10 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private  void setToolBar(){
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
     private void saveCourse(){
         ClassSchedule classSchedule = new ClassSchedule();
@@ -45,15 +58,30 @@ public class AddActivity extends AppCompatActivity {
         classSchedule.setOrder(getNub(1));
         classSchedule.setSpan(getNub(2)-getNub(1)+1);
         classSchedule.setFlag((int) (Math.random() * 10));
-        if(classSchedule.getName().equals("")){
-            Toast.makeText(AddActivity.this,"课程名必填",Toast.LENGTH_SHORT).show();
-        }
-        else if (classSchedule.getSpan()<=0){
-            Toast.makeText(AddActivity.this,"课程起始节需大于等于终止节",Toast.LENGTH_SHORT).show();
-        }else{
+        if (checkData(classSchedule)){
             classSchedule.save();
             Toast.makeText(AddActivity.this,"添加成功，请返回主界面后手动刷新",Toast.LENGTH_SHORT).show();
             finish();
+        }
+
+    }
+    private Boolean checkData(ClassSchedule classSchedule){
+        int week = classSchedule.getWeek();
+        int order= classSchedule.getOrder();
+        List<ClassSchedule> classScheduleList =DataSupport.where("week = ? and order = ?",String.valueOf(week),String.valueOf(order)).find(ClassSchedule.class);
+        if(classSchedule.getName().equals("")){
+            Toast.makeText(AddActivity.this,"课程名必填",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(classScheduleList.size()!=0){
+            Toast.makeText(AddActivity.this,"当前节已存在课程",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (classSchedule.getSpan()!=1&&classSchedule.getSpan()!=2){
+            Toast.makeText(AddActivity.this,"课程长度只有一节或者两节",Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            return true;
         }
 
     }

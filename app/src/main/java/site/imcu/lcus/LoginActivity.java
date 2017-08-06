@@ -1,21 +1,30 @@
 package site.imcu.lcus;
 
+import android.app.ActivityManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.AutoText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bilibili.magicasakura.utils.ThemeUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,23 +44,25 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public String s ;
+    public String s;
     private static final int SUCCESS = 1;
     private static final int FALL = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getYzm();
+        setToolBar();
+        getIdcode();
         Toast.makeText(LoginActivity.this, "在教务系统获取课程成功后会清除当前课程", Toast.LENGTH_LONG).show();
-        ImageView img = (ImageView)findViewById(R.id.yzm_view);
+        ImageView img = (ImageView) findViewById(R.id.idcodeimg);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getYzm();
+                getIdcode();
             }
         });
-        Button login = (Button)findViewById(R.id.login_get);
+        Button login = (Button) findViewById(R.id.login_btn);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,28 +72,33 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void setToolBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
     /*处理html*/
-    private Handler handlerhtml = new Handler(){
-        public void handleMessage(Message msg){
+    private Handler handlerhtml = new Handler() {
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SUCCESS:
                     Document document = Jsoup.parse(msg.obj.toString());
                     Element element = document.getElementById("user");
                     Elements trelement = element.select("tr");
                     List<ClassSchedule> course = new ArrayList<>();
-                    int q=1;
-                    for(int i=0;i<trelement.size();i++){
+                    int q = 1;
+                    for (int i = 0; i < trelement.size(); i++) {
                         Elements tdelement = trelement.get(i).select("td");
-                        if(i!=0 && i!=5 && i!=10) {
-                            for(int j=0;j<7;j++){
-                                String a = tdelement.get(tdelement.size()-1-j).text();
-                                String []b= null;
+                        if (i != 0 && i != 5 && i != 10) {
+                            for (int j = 0; j < 7; j++) {
+                                String a = tdelement.get(tdelement.size() - 1 - j).text();
+                                String[] b = null;
                                 ClassSchedule cs = new ClassSchedule();
-                                if(a.length()>5){
-                                    b=a.split("[_()]");
+                                if (a.length() > 5) {
+                                    b = a.split("[_()]");
                                     cs.setName(b[0]);
                                     cs.setLocation(b[2]);
-                                    cs.setWeek(7-j);
+                                    cs.setWeek(7 - j);
                                     cs.setOrder(q);
                                     cs.setSpan(2);
                                     cs.setFlag((int) (Math.random() * 10));
@@ -91,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                             i++;
-                            q+=2;
+                            q += 2;
 
                         }
 
@@ -105,64 +121,64 @@ public class LoginActivity extends AppCompatActivity {
                     break;
 
 
-
             }
         }
     };
-    private void getHtml(){
-        final EditText zjh=(EditText) findViewById(R.id.tv_user_name);
-        final EditText mm=(EditText)findViewById(R.id.tv_password);
-        final EditText yzm=(EditText)findViewById(R.id.tv_yzm);
+
+    private void getHtml() {
+        final EditText zjh = (EditText) findViewById(R.id.username);
+        final EditText mm = (EditText) findViewById(R.id.password);
+        final EditText yzm = (EditText) findViewById(R.id.idcode);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     OkHttpClient client = new OkHttpClient.Builder()
                             .build();
                     RequestBody body = new FormBody.Builder()
-                            .add("zjh",zjh.getText().toString())
-                            .add("mm",mm.getText().toString())
-                            .add("v_yzm",yzm.getText().toString())
+                            .add("zjh", zjh.getText().toString())
+                            .add("mm", mm.getText().toString())
+                            .add("v_yzm", yzm.getText().toString())
                             .build();
 
                     Request request = new Request.Builder()
                             .url("http://jwcweb.lcu.edu.cn/loginAction.do")
-                            .addHeader("cookie",s)
+                            .addHeader("cookie", s)
                             .post(body)
                             .build();
-                    Response response  = client.newCall(request).execute();
+                    Response response = client.newCall(request).execute();
                     Request request1 = new Request.Builder()
                             .url("http://jwcweb.lcu.edu.cn/xkAction.do?actionType=6")
-                            .addHeader("cookie",s)
+                            .addHeader("cookie", s)
                             .build();
                     Response response1 = client.newCall(request1).execute();
                     String responseData = response1.body().string();
                     Document document = Jsoup.parse(responseData);
                     Element element = document.select("title").first();
                     Message message = handlerhtml.obtainMessage();
-                    if (element.text().equals("学生选课结果")){
-                        message.what=SUCCESS;
-                        message.obj=(Object) responseData;
-                    }
-                    else {
-                        message.what=FALL;
+                    if (element.text().equals("学生选课结果")) {
+                        message.what = SUCCESS;
+                        message.obj = (Object) responseData;
+                    } else {
+                        message.what = FALL;
                     }
                     handlerhtml.sendMessage(message);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
-    /*获取验证码*/
-    private Handler handleryzm = new Handler(){
 
-        public void handleMessage(Message msg){
+    /*获取验证码*/
+    private Handler handleryzm = new Handler() {
+
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SUCCESS:
                     byte[] pic = (byte[]) msg.obj;
                     Bitmap bitmap = BitmapFactory.decodeByteArray(pic, 0, pic.length);
-                    ImageView imageView =(ImageView)findViewById(R.id.yzm_view);
+                    ImageView imageView = (ImageView) findViewById(R.id.idcodeimg);
                     imageView.setImageBitmap(bitmap);
                     Toast.makeText(LoginActivity.this, "验证码获取成功", Toast.LENGTH_SHORT).show();
                     break;
@@ -172,7 +188,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     };
-    private void getYzm(){
+
+    private void getIdcode() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -182,16 +199,16 @@ public class LoginActivity extends AppCompatActivity {
                     Response response = client.newCall(request).execute();
                     byte[] pic = response.body().bytes();
                     Message message = handleryzm.obtainMessage();
-                    message.what=SUCCESS;
-                    message.obj=pic;
+                    message.what = SUCCESS;
+                    message.obj = pic;
                     handleryzm.sendMessage(message);
                     Headers headers = response.headers();
                     List<String> cookies = headers.values("Set-Cookie");
                     Log.d("info_cookies", "onResponse-size: " + cookies);
                     String session = cookies.get(0);
-                    s = session.substring(0,session.indexOf(";"));
+                    s = session.substring(0, session.indexOf(";"));
                     Log.i("info_s", "session is  :" + s);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

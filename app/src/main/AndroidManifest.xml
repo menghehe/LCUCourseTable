@@ -3,9 +3,8 @@
     package="site.imcu.lcus">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
-        android:name="org.litepal.LitePalApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
@@ -25,8 +24,11 @@
         <activity
             android:name=".AddActivity"
             android:label="@string/add_course" />
-        <activity android:name=".EditActivity"
-            android:label="@string/edit_course"></activity>
+        <activity
+            android:name=".EditActivity"
+            android:label="@string/edit_course" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".ScoreActivity" />
     </application>
 
 </manifest>

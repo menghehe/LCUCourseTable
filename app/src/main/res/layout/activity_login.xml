@@ -1,77 +1,99 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.bilibili.magicasakura.widgets.TintLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="site.imcu.lcus.LoginActivity">
-        <LinearLayout
+    <include layout="@layout/toolbar" />
+    <com.bilibili.magicasakura.widgets.TintLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <com.bilibili.magicasakura.widgets.TintLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-            <EditText
-                    android:id="@+id/tv_user_name"
+                <com.bilibili.magicasakura.widgets.TintEditText
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/login_user_name_hint"
-                    android:inputType="number"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/tv_password"
+                    android:inputType="number"
+                    android:background="@drawable/ic_edit_text_default"
+                    android:drawableLeft="@drawable/ic_person_outline_white_24dp"
+                    android:drawablePadding="@dimen/padding_half"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding_half"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="13sp"
+                    app:backgroundTint="@color/selector_focus"
+                    app:drawableLeftTint="@color/selector_focus" />
+                <com.bilibili.magicasakura.widgets.TintEditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/login_user_name_password"
                     android:inputType="textPassword"
                     android:maxLength="20"
-                    android:maxLines="1" />
-            </android.support.design.widget.TextInputLayout>
-            <LinearLayout
-                android:orientation="horizontal"
+                    android:maxLines="1"
+                    android:background="@drawable/ic_edit_text_default"
+                    android:drawableLeft="@drawable/ic_lock_white_24dp"
+                    android:drawablePadding="@dimen/padding_half"
+                    android:padding="@dimen/padding_half"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="13sp"
+                    app:backgroundTint="@color/selector_focus"
+                    app:drawableLeftTint="@color/selector_focus"/>
+            <com.bilibili.magicasakura.widgets.TintLinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="180sp"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/tv_yzm"
-                        android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                    <com.bilibili.magicasakura.widgets.TintEditText
+                        android:id="@+id/idcode"
+                        android:layout_width="180sp"
+                        android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:hint="@string/login_yzm"
                         android:inputType="text"
-                        android:maxLength="20"
-                        android:maxLines="1"/>
-                </android.support.design.widget.TextInputLayout>
-                <ImageView
-                    android:id="@+id/yzm_view"
-                    android:layout_width="160sp"
+                        android:maxLength="4"
+                        android:background="@drawable/ic_edit_text_default"
+                        android:drawableLeft="@drawable/ic_adb_white_24dp"
+                        android:drawablePadding="@dimen/padding_half"
+                        android:maxLines="1"
+                        android:padding="@dimen/padding_half"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        android:textSize="13sp"
+                        app:backgroundTint="@color/selector_focus"
+                        app:drawableLeftTint="@color/selector_focus" />
+                <com.bilibili.magicasakura.widgets.TintImageView
+                    android:id="@+id/idcodeimg"
+                    android:layout_width="180sp"
                     android:layout_height="46sp" />
-            </LinearLayout>
+            </com.bilibili.magicasakura.widgets.TintLinearLayout>
 
-            <Button
-                android:id="@+id/login_get"
+            <com.bilibili.magicasakura.widgets.TintButton
+                android:id="@+id/login_btn"
                 style="?android:textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/colorAccent"
                 android:padding="16dp"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_login"
+                android:enabled="true"
+                android:gravity="center"
+                android:textSize="@dimen/textsize_large" />
+        </com.bilibili.magicasakura.widgets.TintLinearLayout>
+    </com.bilibili.magicasakura.widgets.TintLinearLayout>
 
-</LinearLayout>
-</LinearLayout>
+</com.bilibili.magicasakura.widgets.TintLinearLayout>
