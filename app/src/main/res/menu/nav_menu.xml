@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_account"
+            android:title="教务账号"/>
+        <item
             android:id="@+id/nav_jwxt"
             android:title="从教务系统导入"/>
         <item
@@ -10,9 +13,6 @@
         <item
             android:id="@+id/nav_score"
             android:title="成绩查询"/>
-        <item
-            android:id="@+id/nav_theme"
-            android:title="主题风格"/>
         <item
             android:id="@+id/nav_about"
             android:title="关于"/>

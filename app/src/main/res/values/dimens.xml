@@ -39,15 +39,21 @@
     <dimen name="big_activity_margin_horizontal">72dp</dimen>
     <dimen name="big_activity_fab_margin">16dp</dimen>
     <dimen name="big_activity_text_margin">16dp</dimen>
-	
+
     <dimen name="sectionHeight">50dp</dimen>
-	
-	<dimen name="textsize_large">18sp</dimen>
+
+    <dimen name="textsize_large">18sp</dimen>
     <dimen name="textsize_normal">16sp</dimen>
     <dimen name="textsize_small">14sp</dimen>
-	
-	<dimen name="padding">16dp</dimen>
-	<dimen name="padding_half">8dp</dimen>
+
+    <dimen name="padding">16dp</dimen>
+    <dimen name="padding_half">8dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
 
 
 </resources>

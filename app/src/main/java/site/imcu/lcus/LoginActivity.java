@@ -1,11 +1,14 @@
 package site.imcu.lcus;
 
 import android.app.ActivityManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +22,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,9 +48,17 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public String s;
+    public String session;
     private static final int SUCCESS = 1;
     private static final int FALL = 2;
+    private SharedPreferences pref;
+    private  SharedPreferences.Editor editor;
+    private CheckBox rememberPass;
+    private EditText accountEdit;
+    private EditText passwordEdit;
+    private EditText account;
+    private EditText password;
+    private EditText idcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         setToolBar();
         getIdcode();
-        Toast.makeText(LoginActivity.this, "在教务系统获取课程成功后会清除当前课程", Toast.LENGTH_LONG).show();
+        restorePass();
         ImageView img = (ImageView) findViewById(R.id.idcodeimg);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,69 +78,61 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataSupport.deleteAll(ClassSchedule.class);
-                getHtml();
+                login();
             }
         });
     }
 
+    private void restorePass(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        accountEdit = (EditText)findViewById(R.id.username);
+        passwordEdit=(EditText)findViewById(R.id.password);
+        rememberPass=(CheckBox) findViewById(R.id.remember_pass);
+        boolean isremember = pref.getBoolean("remember_password",false);
+        if (isremember){
+            String account = pref.getString("account","");
+            String password = pref.getString("password","");
+            accountEdit.setText(account);
+            passwordEdit.setText(password);
+            rememberPass.setChecked(true);
+        }
+    }
     private void setToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    /*处理html*/
-    private Handler handlerhtml = new Handler() {
+    private Handler handlerData = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SUCCESS:
-                    Document document = Jsoup.parse(msg.obj.toString());
-                    Element element = document.getElementById("user");
-                    Elements trelement = element.select("tr");
-                    List<ClassSchedule> course = new ArrayList<>();
-                    int q = 1;
-                    for (int i = 0; i < trelement.size(); i++) {
-                        Elements tdelement = trelement.get(i).select("td");
-                        if (i != 0 && i != 5 && i != 10) {
-                            for (int j = 0; j < 7; j++) {
-                                String a = tdelement.get(tdelement.size() - 1 - j).text();
-                                String[] b = null;
-                                ClassSchedule cs = new ClassSchedule();
-                                if (a.length() > 5) {
-                                    b = a.split("[_()]");
-                                    cs.setName(b[0]);
-                                    cs.setLocation(b[2]);
-                                    cs.setWeek(7 - j);
-                                    cs.setOrder(q);
-                                    cs.setSpan(2);
-                                    cs.setFlag((int) (Math.random() * 10));
-                                    course.add(cs);
-                                }
-
-                            }
-                            i++;
-                            q += 2;
-
-                        }
-
+                    editor = pref.edit();
+                    if(rememberPass.isChecked()){
+                        editor.putBoolean("remember_password",true);
+                        editor.putString("account",account.getText().toString());
+                        editor.putString("password",password.getText().toString());
                     }
-                    DataSupport.saveAll(course);
-                    Toast.makeText(LoginActivity.this, "获取成功,请返回主界面后下拉刷新", Toast.LENGTH_SHORT).show();
+                    else {
+                        editor.clear();
+                    }
+                    editor.apply();
+                    Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.putExtra("session",session);
+                    setResult(RESULT_OK,intent);
                     finish();
                     break;
                 case FALL:
-                    Toast.makeText(LoginActivity.this, "哪里出错了", Toast.LENGTH_SHORT).show();
-                    break;
-
+                    Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
 
             }
         }
     };
 
-    private void getHtml() {
-        final EditText zjh = (EditText) findViewById(R.id.username);
-        final EditText mm = (EditText) findViewById(R.id.password);
-        final EditText yzm = (EditText) findViewById(R.id.idcode);
+    private void login() {
+        account = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
+        idcode = (EditText) findViewById(R.id.idcode);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -136,33 +140,32 @@ public class LoginActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient.Builder()
                             .build();
                     RequestBody body = new FormBody.Builder()
-                            .add("zjh", zjh.getText().toString())
-                            .add("mm", mm.getText().toString())
-                            .add("v_yzm", yzm.getText().toString())
+                            .add("zjh", account.getText().toString())
+                            .add("mm", password.getText().toString())
+                            .add("v_yzm", idcode.getText().toString())
                             .build();
-
                     Request request = new Request.Builder()
                             .url("http://jwcweb.lcu.edu.cn/loginAction.do")
-                            .addHeader("cookie", s)
+                            .addHeader("cookie", session)
                             .post(body)
                             .build();
                     Response response = client.newCall(request).execute();
                     Request request1 = new Request.Builder()
                             .url("http://jwcweb.lcu.edu.cn/xkAction.do?actionType=6")
-                            .addHeader("cookie", s)
+                            .addHeader("cookie", session)
                             .build();
                     Response response1 = client.newCall(request1).execute();
                     String responseData = response1.body().string();
                     Document document = Jsoup.parse(responseData);
                     Element element = document.select("title").first();
-                    Message message = handlerhtml.obtainMessage();
+                    Message message = handlerData.obtainMessage();
                     if (element.text().equals("学生选课结果")) {
                         message.what = SUCCESS;
-                        message.obj = (Object) responseData;
-                    } else {
-                        message.what = FALL;
+                        message.obj=session;
+                    }else {
+                        message.what=FALL;
                     }
-                    handlerhtml.sendMessage(message);
+                    handlerData.sendMessage(message);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -171,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /*获取验证码*/
-    private Handler handleryzm = new Handler() {
+    private Handler handlerIdcode = new Handler() {
 
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -180,7 +183,6 @@ public class LoginActivity extends AppCompatActivity {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(pic, 0, pic.length);
                     ImageView imageView = (ImageView) findViewById(R.id.idcodeimg);
                     imageView.setImageBitmap(bitmap);
-                    Toast.makeText(LoginActivity.this, "验证码获取成功", Toast.LENGTH_SHORT).show();
                     break;
                 case FALL:
                     Toast.makeText(LoginActivity.this, "网络出现了问题", Toast.LENGTH_SHORT).show();
@@ -195,19 +197,18 @@ public class LoginActivity extends AppCompatActivity {
             public void run() {
                 try {
                     OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().url("http://jwcweb.lcu.edu.cn/validateCodeAction.do?random=0.4340224302096043").build();
+                    Request request = new Request.Builder().url("http://jwcweb.lcu.edu.cn/validateCodeAction.do?random").build();
                     Response response = client.newCall(request).execute();
                     byte[] pic = response.body().bytes();
-                    Message message = handleryzm.obtainMessage();
+                    Message message = handlerIdcode.obtainMessage();
                     message.what = SUCCESS;
                     message.obj = pic;
-                    handleryzm.sendMessage(message);
+                    handlerIdcode.sendMessage(message);
                     Headers headers = response.headers();
                     List<String> cookies = headers.values("Set-Cookie");
                     Log.d("info_cookies", "onResponse-size: " + cookies);
-                    String session = cookies.get(0);
-                    s = session.substring(0, session.indexOf(";"));
-                    Log.i("info_s", "session is  :" + s);
+                    session = cookies.get(0);
+                    session = session.substring(0, session.indexOf(";"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

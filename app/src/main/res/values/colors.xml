@@ -3,28 +3,28 @@
     <color name="colorPrimary">#26A69A</color>
     <color name="colorPrimaryDark">#009688</color>
     <color name="colorAccent">#00796B</color>
-	<color name="item_divider">#EFEFEF</color>
+    <color name="item_divider">#EFEFEF</color>
     <color name="white">#ffffff</color>
-	<color name="transparent">#00000000</color>
-	<color name="main_background">#eeeeee</color>
-	<color name="gray_very_light">#e0e0e0</color>
+    <color name="transparent">#00000000</color>
+    <color name="main_background">#eeeeee</color>
+    <color name="gray_very_light">#e0e0e0</color>
     <color name="red_primary">#F44336</color>
     <color name="red_primary_dark">#D32F2F</color>
     <color name="red_accent">#F44336</color>
-	
-	
-	<color name="theme_color_primary">#fb7299</color>
+
+
+    <color name="theme_color_primary">#fb7299</color>
     <color name="theme_color_primary_dark">#b85671</color>
     <color name="theme_color_primary_trans">#99f0486c</color>
-	
-	<color name="text_primary_color">#2d2d2d</color>
+
+    <color name="text_primary_color">#2d2d2d</color>
     <color name="window_background">#eaeaea</color>
 
-	<color name="gray">#bbbbbb</color>
+    <color name="gray">#bbbbbb</color>
     <color name="gray_dark">#999999</color>
     <color name="gray_trans">#44999999</color>
     <color name="gray_light">#dcdcdc</color>
-   <!-- theme color -->
+    <!-- theme color -->
     <color name="pink">#fb7299</color>
     <color name="pink_dark">#b85671</color>
     <color name="pink_trans">#99f0486c</color>
@@ -57,4 +57,10 @@
     <color name="red_dark">#C62828</color>
     <color name="red_trans">#99F44336</color>
 	
+	<color name="teal">#009688</color>
+    <color name="teal_dark">#00796B</color>
+    <color name="teal_trans">#64FFDA</color>
+
+    <color name="black_overlay">#66000000</color>
+
 </resources>

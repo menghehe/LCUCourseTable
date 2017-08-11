@@ -23,6 +23,10 @@
     <string name="jhy">jhy/jsoup</string>
     <string name="litepal">LitePalFramework/LitePal</string>
     <string name="venshine">venshine/WheelView</string>
-    <string name="square">square/okhttp</string>
-    <string name="about_card1_message">聊大课表——powered by SHIELD_7</string>
+    <string name="urp">Risid/URP </string>
+	<string name="tess">rmtheis/tess-two </string>
+	<string name="okhttp">square/okhttp</string>
+    <string name="about_card1_message">聊大课表——😋这是一个练习应用😋</string>
+
+
 </resources>

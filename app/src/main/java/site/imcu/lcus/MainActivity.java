@@ -2,30 +2,26 @@ package site.imcu.lcus;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,17 +31,35 @@ import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 
-import org.litepal.crud.DataSupport;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import site.imcu.lcus.Activity.AboutActivity;
+import site.imcu.lcus.Activity.AddActivity;
+import site.imcu.lcus.Activity.EditActivity;
+import site.imcu.lcus.Activity.LeadinActivity;
+import site.imcu.lcus.Activity.LoginActivity;
+import site.imcu.lcus.Activity.ScoreActivity;
+import site.imcu.lcus.Course.ClassSchedule;
+import site.imcu.lcus.Course.ColorUtils;
+import site.imcu.lcus.Course.CornerTextView;
+import site.imcu.lcus.Course.CourseDao;
+import site.imcu.lcus.Theme.CardPickerDialog;
+import site.imcu.lcus.Theme.SnackAnimationUtil;
+import site.imcu.lcus.Theme.ThemeHelper;
 
 
 public class MainActivity extends AppCompatActivity implements CardPickerDialog.ClickListener{
@@ -61,31 +75,112 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
     @BindViews({R.id.weekPanel_1, R.id.weekPanel_2, R.id.weekPanel_3, R.id.weekPanel_4, R.id.weekPanel_5})
     List<LinearLayout> mWeekViews;
     private int itemHeight;
-    private int maxSection = 10;
+    int maxSection = 10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        whenFirst();
         setToolBar();
         ButterKnife.bind(this);
-        itemHeight = getResources().getDimensionPixelSize(R.dimen.sectionHeight);
         initWeekNameView();
         initSectionView();
         initWeekCourseView();
         setRefreshListener();
-        setNavListenner();
-        // setAddListenner();
+        setNavListener();
 
     }
-    private  void setNavListenner(){
+    /**
+     * 第一次启动处理
+     */
+    private void whenFirst(){
+        copyFileOrDir("tessdata");
+        SharedPreferences sharedPreferences=this.getSharedPreferences("share",MODE_PRIVATE);
+        boolean isFirstRun=sharedPreferences.getBoolean("isFirstRun", true);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        if(isFirstRun){
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+            editor.putBoolean("isFirstRun", false);
+            editor.apply();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        OkHttpClient client = new OkHttpClient();
+                        Request request = new Request.Builder().url("http://iguxue.cn/Blog/?p=100").build();
+                        Response response = client.newCall(request).execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
+    private void copyFileOrDir(String path) {
+        AssetManager assetManager = this.getAssets();
+        String assets[] = null;
+        try {
+            assets = assetManager.list(path);
+            if (assets.length == 0) {
+                copyFile(path);
+            } else {
+                String fullPath = "/data/data/" + this.getPackageName() + "/" + path;
+                File dir = new File(fullPath);
+                if (!dir.exists())
+                    if (!dir.mkdir()){
+                        return;
+                    }
+                for (String asset : assets) {
+                    copyFileOrDir(path + "/" + asset);
+                }
+            }
+        } catch (IOException ex) {
+            Log.e("tag", "I/O Exception", ex);
+        }
+    }
+
+    private void copyFile(String filename) {
+        AssetManager assetManager = this.getAssets();
+
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            in = assetManager.open(filename);
+            String newFileName = "/data/data/" + this.getPackageName() + "/" + filename;
+            out = new FileOutputStream(newFileName);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+        } catch (Exception e) {
+            Log.e("tag", e.getMessage());
+        }
+
+    }
+    /**
+     * 抽屉listener
+     */
+    private  void setNavListener(){
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Intent intent = new Intent();
                 switch (item.getItemId()) {
-                    case R.id.nav_jwxt:
+                    case R.id.nav_account:
                         intent.setClass(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_jwxt:
+                        intent.setClass(MainActivity.this, LeadinActivity.class);
                         startActivity(intent);
                         break;
 
@@ -108,11 +203,24 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
             }
         });
     }
-
+    /**
+     * toolbar
+     */
     private  void setToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("聊大课表");
         setSupportActionBar(toolbar);
-
+        initDrawerToggle();
+    }
+    /**
+     * toolbars 左边导航
+     */
+    private void initDrawerToggle() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final DrawerLayout mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,0,0);
+        mDrawerToggle.syncState();
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     /**
@@ -206,16 +314,10 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
      * 当前月份
      */
     public int getMonth() {
-        int w = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        return w;
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        return month;
     }
     /**
-     * 当前日期
-     */
-    public int getDay() {
-        int w = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        return w;
-    }
     /**
      * 数字转换中文
      */
@@ -257,6 +359,8 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
     }
 
     public void initWeekPanel(LinearLayout ll, List<ClassSchedule> data) {
+
+        itemHeight = getResources().getDimensionPixelSize(R.dimen.sectionHeight);
 
         if (ll == null || data == null || data.size() < 1)
             return;
@@ -314,6 +418,9 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
         return (int) (dpValue * scale + 0.5f);
     }
 
+    /**
+     * 哔哩哔哩主题设置
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -322,11 +429,12 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.change_theme) {
-            CardPickerDialog dialog = new CardPickerDialog();
-            dialog.setClickListener(this);
-            dialog.show(getSupportFragmentManager(), CardPickerDialog.TAG);
-            return true;
+        switch (item.getItemId()){
+            case R.id.change_theme:
+                CardPickerDialog dialog = new CardPickerDialog();
+                dialog.setClickListener(this);
+                dialog.show(getSupportFragmentManager(), CardPickerDialog.TAG);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -351,7 +459,6 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
 
                         @Override
                         public void refreshSpecificView(View view) {
-                            //TODO: will do this for each traversal
                         }
                     }
             );

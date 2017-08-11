@@ -5,5 +5,5 @@
         android:id="@+id/change_theme"
         android:icon="@drawable/ic_card_48dp"
         android:title="选择主题"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 </menu>

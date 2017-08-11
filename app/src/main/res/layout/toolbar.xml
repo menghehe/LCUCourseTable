@@ -8,5 +8,6 @@
     android:maxHeight="?attr/actionBarSize"
     app:showAsAction="ifRoom"
     android:paddingTop="25dp"
+    app:layout_scrollFlags="scroll|enterAlways|snap"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 </com.bilibili.magicasakura.widgets.TintToolbar>
