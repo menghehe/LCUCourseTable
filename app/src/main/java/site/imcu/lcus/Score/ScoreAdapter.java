@@ -48,9 +48,8 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
         Score score = mScoreList.get(position);
         holder.course.setText(score.getKcm());
         holder.score.setText(score.getCj());
-        holder.sbjg.setText("尚不及格"+score.getSbjg().toString());
         holder.cbjg.setText("曾不及格"+score.getCbjg().toString());
-
+        holder.sbjg.setText("尚不及格" + score.getSbjg().toString());
     }
     @Override
     public int getItemCount(){

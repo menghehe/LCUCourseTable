@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="site.imcu.lcus.Activity.LeadinActivity">
+    tools:context="site.imcu.lcus.Activity.LeadActivity">
     <include layout="@layout/toolbar"/>
     <com.bilibili.magicasakura.widgets.TintLinearLayout
         android:layout_width="match_parent"

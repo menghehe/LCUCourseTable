@@ -35,7 +35,7 @@
             android:name=".Activity.ScoreActivity"
             android:label="成绩查询" />
         <activity
-            android:name=".Activity.LeadinActivity"
+            android:name=".Activity.LeadActivity"
             android:label="导入课程" />
 
     </application>

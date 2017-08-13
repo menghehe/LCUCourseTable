@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -44,13 +45,10 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import site.imcu.lcus.Activity.AboutActivity;
 import site.imcu.lcus.Activity.AddActivity;
 import site.imcu.lcus.Activity.EditActivity;
-import site.imcu.lcus.Activity.LeadinActivity;
+import site.imcu.lcus.Activity.LeadActivity;
 import site.imcu.lcus.Activity.LoginActivity;
 import site.imcu.lcus.Activity.ScoreActivity;
 import site.imcu.lcus.Course.ClassSchedule;
@@ -95,26 +93,14 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
      */
     private void whenFirst(){
         copyFileOrDir("tessdata");
-        SharedPreferences sharedPreferences=this.getSharedPreferences("share",MODE_PRIVATE);
-        boolean isFirstRun=sharedPreferences.getBoolean("isFirstRun", true);
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isFirstRun=sharedPreferences.getBoolean("isFirst", true);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         if(isFirstRun){
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
-            editor.putBoolean("isFirstRun", false);
+            editor.putBoolean("isFirst", false);
             editor.apply();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        OkHttpClient client = new OkHttpClient();
-                        Request request = new Request.Builder().url("http://iguxue.cn/Blog/?p=100").build();
-                        Response response = client.newCall(request).execute();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
         }
     }
     private void copyFileOrDir(String path) {
@@ -180,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
                         startActivity(intent);
                         break;
                     case R.id.nav_jwxt:
-                        intent.setClass(MainActivity.this, LeadinActivity.class);
+                        intent.setClass(MainActivity.this, LeadActivity.class);
                         startActivity(intent);
                         break;
 

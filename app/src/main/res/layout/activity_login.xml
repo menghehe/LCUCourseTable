@@ -52,32 +52,6 @@
                     android:textSize="13sp"
                     app:backgroundTint="@color/selector_focus"
                     app:drawableLeftTint="@color/selector_focus"/>
-            <com.bilibili.magicasakura.widgets.TintLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                    <com.bilibili.magicasakura.widgets.TintEditText
-                        android:id="@+id/idcode"
-                        android:layout_width="180sp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:hint="@string/login_yzm"
-                        android:inputType="text"
-                        android:maxLength="4"
-                        android:background="@drawable/ic_edit_text_default"
-                        android:drawableLeft="@drawable/code"
-                        android:drawablePadding="@dimen/padding_half"
-                        android:maxLines="1"
-                        android:padding="@dimen/padding_half"
-                        android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:textSize="13sp"
-                        app:backgroundTint="@color/selector_focus"
-                        app:drawableLeftTint="@color/selector_focus" />
-                <com.bilibili.magicasakura.widgets.TintImageView
-                    android:id="@+id/idcodeimg"
-                    android:layout_width="180sp"
-                    android:layout_height="match_parent" />
-            </com.bilibili.magicasakura.widgets.TintLinearLayout>
 
 
             <com.bilibili.magicasakura.widgets.TintButton
@@ -181,7 +155,7 @@
 
                             android:layout_height="wrap_content"
 
-                            android:text="若验证码识别有误可点击验证码刷新"
+                            android:text="若登陆失败请重试或检查账号设置"
 
                             android:textColor="@color/theme_color_primary_trans"
 
