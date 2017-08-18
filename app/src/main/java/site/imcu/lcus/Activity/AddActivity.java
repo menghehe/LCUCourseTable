@@ -49,8 +49,10 @@ public class AddActivity extends AppCompatActivity {
         ClassSchedule classSchedule = new ClassSchedule();
         EditText name =(EditText)findViewById(R.id.add_name);
         EditText location=(EditText)findViewById(R.id.add_location);
+        EditText teacher=(EditText)findViewById(R.id.add_teacher);
         classSchedule.setName(name.getText().toString());
         classSchedule.setLocation(location.getText().toString());
+        classSchedule.setTeacher(teacher.getText().toString());
         classSchedule.setWeek(getWeek());
         classSchedule.setOrder(getNub(1));
         classSchedule.setSpan(getNub(2)-getNub(1)+1);
@@ -93,7 +95,7 @@ public class AddActivity extends AppCompatActivity {
         weekView.setWheelAdapter(new ArrayWheelAdapter(this)); // 文本数据源
         weekView.setSkin(WheelView.Skin.None); // common皮肤
         weekView.setWheelData(week);  // 数据集合
-        List<String> order = new ArrayList<String>();
+        List<String> order = new ArrayList<>();
         String one = "一";order.add(one);
         String two = "二";order.add(two);
         String thr = "三";order.add(thr);

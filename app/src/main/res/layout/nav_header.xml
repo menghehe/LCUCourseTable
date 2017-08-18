@@ -15,9 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="聊大课表"
+        android:text="@string/app_name"
         android:textStyle="bold"
         android:textSize="26sp" />
-
-
 </RelativeLayout>

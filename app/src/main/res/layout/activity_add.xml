@@ -48,11 +48,29 @@
                 android:textSize="13sp"
                 app:backgroundTint="@color/selector_focus"
                 app:drawableLeftTint="@color/selector_focus"/>
+        <com.bilibili.magicasakura.widgets.TintEditText
+            android:id="@+id/add_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="授课教师"
+            android:inputType="text"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:background="@drawable/ic_edit_text_default"
+            android:drawableLeft="@drawable/person"
+            android:drawablePadding="@dimen/padding_half"
+            android:padding="@dimen/padding_half"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="13sp"
+            app:backgroundTint="@color/selector_focus"
+            app:drawableLeftTint="@color/selector_focus"/>
         <android.support.v7.widget.CardView
             android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -64,6 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="125sp"
                     android:gravity="center_vertical"
+                    android:textStyle="bold"
                     android:text="第"
                     android:textSize="25sp"/>
                 <com.wx.wheelview.widget.WheelView
@@ -73,6 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="100sp"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
                     android:text="节至"
                     android:textSize="25sp"/>
@@ -80,6 +100,13 @@
                     android:id="@+id/chose_span"
                     android:layout_width="60sp"
                     android:layout_height="80sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="100sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:text="节"
+                    android:textSize="25sp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
         <com.bilibili.magicasakura.widgets.TintButton

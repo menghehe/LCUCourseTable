@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.bilibili.magicasakura.widgets.TintLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,11 +8,56 @@
         android:layout_height="wrap_content">
         <include layout="@layout/toolbar"/>
     </FrameLayout>
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/score_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</android.support.v7.widget.RecyclerView>
-
+    <com.bilibili.magicasakura.widgets.TintLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+    <com.bilibili.magicasakura.widgets.TintButton
+        android:id="@+id/score_fail"
+        style="?android:textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="不及格成绩查询"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/selector_login"
+        android:enabled="true"
+        android:gravity="center"
+        android:textSize="@dimen/textsize_large" />
+    <com.bilibili.magicasakura.widgets.TintButton
+        android:id="@+id/score_this_term"
+        style="?android:textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="本学期成绩查询"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/selector_login"
+        android:enabled="true"
+        android:gravity="center"
+        android:textSize="@dimen/textsize_large" />
+    <com.bilibili.magicasakura.widgets.TintButton
+        android:id="@+id/score_all"
+        style="?android:textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="全部成绩查询"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/selector_login"
+        android:enabled="true"
+        android:gravity="center"
+        android:textSize="@dimen/textsize_large" />
+    </com.bilibili.magicasakura.widgets.TintLinearLayout>
 </com.bilibili.magicasakura.widgets.TintLinearLayout>

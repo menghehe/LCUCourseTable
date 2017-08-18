@@ -2,6 +2,9 @@ package site.imcu.lcus.Course;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mengh on 2017/7/29.
  */
@@ -13,6 +16,25 @@ public class ClassSchedule extends DataSupport{
     private String name;//课程名称
     private String location;//课程地点
     private int flag;//课程颜色
+    private String teacher;//
+    private String weekList;//
+    private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getWeekList() {
+        return weekList;
+    }
+
+    public void setWeekList(String weekList) {
+        this.weekList = weekList;
+    }
 
     public int getWeek(){
         return week;
@@ -28,6 +50,10 @@ public class ClassSchedule extends DataSupport{
         return name;
     }
     public int getFlag(){return flag;}
+    public String getTeacher() {
+        return teacher;
+    }
+
 
     public void setWeek(int week){
         this.week=week;
@@ -43,4 +69,7 @@ public class ClassSchedule extends DataSupport{
         this.name=name;
     }
     public void setFlag(int flag){this.flag=flag;}
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
 }

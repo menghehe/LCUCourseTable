@@ -55,13 +55,13 @@ public class LeadActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showProgress();
                 Log.d(TAG, "onClick: ");
                 login();
             }
         });
     }
     private void login(){
-        showLoginProgress();
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
@@ -74,11 +74,10 @@ public class LeadActivity extends AppCompatActivity {
             public void accept(String mSession) throws Exception {
                 if (!mSession.equals("null")){
                     session=mSession;
-                    progressDialog.dismiss();
                     getTable();
                 }else {
-                    login();
                     progressDialog.dismiss();
+                    Toast.makeText(LeadActivity.this, "登陆失败,请重试", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -88,7 +87,6 @@ public class LeadActivity extends AppCompatActivity {
 
     }
     private void getTable(){
-        showGetProgress();
         Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
@@ -113,51 +111,95 @@ public class LeadActivity extends AppCompatActivity {
 
     }
     private void initData(String html){
-                    Document document = Jsoup.parse(html);
-                    Element element = document.getElementById("user");
-                    Elements trelement = element.select("tr");
-                    List<ClassSchedule> course = new ArrayList<>();
-                    int q = 1;
-                    for (int i = 0; i < trelement.size(); i++) {
-                        Elements tdelement = trelement.get(i).select("td");
-                        if (i != 0 && i != 5 && i != 10) {
-                            for (int j = 0; j < 7; j++) {
-                                String a = tdelement.get(tdelement.size() - 1 - j).text();
-                                String[] b = null;
-                                ClassSchedule cs = new ClassSchedule();
-                                if (a.length() > 5) {
-                                    b = a.split("[_()]");
-                                    cs.setName(b[0].replace("  ",""));
-                                    cs.setLocation(b[2]);
-                                    cs.setWeek(7 - j);
-                                    cs.setOrder(q);
-                                    cs.setSpan(2);
-                                    cs.setFlag((int) (Math.random() * 10));
-                                    course.add(cs);
-                                }
-                            }
-                            i++;
-                            q += 2;
+        Document document = Jsoup.parse(html);
+        Elements elements = document.getElementsByClass("displayTag");
+        Elements tBody = elements.get(1).select("tbody");
+        Elements trElement = tBody.get(0).select("tr");
+        Log.d(TAG, "initData1: ");
+        List<ClassSchedule> course = new ArrayList<>();
+        for (int i=0;i<trElement.size();i++){
+            Elements tdElement = trElement.get(i).select("td");
+            ClassSchedule cs = new ClassSchedule();
 
-                        }
-                    }
-                    DataSupport.saveAll(course);
-                    progressDialog.dismiss();
-                    Toast.makeText(LeadActivity.this, "获取成功,请返回主界面后下拉刷新", Toast.LENGTH_SHORT).show();
-                    finish();
+            if(tdElement.size()==18&&!tdElement.get(13).text().equals(" ")){
+                cs.setName(tdElement.get(2).text());
+                cs.setTeacher(tdElement.get(7).text());
+                cs.setWeekList(tdElement.get(11).text());
+                cs.setWeek(strToInt(tdElement.get(12).text()));
+                cs.setOrder(strToInt(tdElement.get(13).text()));
+                cs.setSpan(strToInt(tdElement.get(14).text()));
+                cs.setLocation(tdElement.get(17).text());
+                cs.setFlag((int) (Math.random() * 10));
+                Log.d(TAG, "initData:"+cs.getWeekList());
+                course.add(cs);
             }
-    private void showLoginProgress(){
-        progressDialog = new ProgressDialog(LeadActivity.this);
-        progressDialog.setMessage("登陆中");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
+            if(tdElement.size()!=18&&!tdElement.get(0).text().equals(" ")){
+                cs.setName(course.get(course.size()-1).getName());
+                cs.setTeacher(course.get(course.size()-1).getTeacher());
+                cs.setWeekList(tdElement.get(0).text());
+                cs.setWeek(strToInt(tdElement.get(1).text()));
+                cs.setOrder(strToInt(tdElement.get(2).text()));
+                cs.setSpan(strToInt(tdElement.get(3).text()));
+                cs.setLocation(tdElement.get(6).text());
+                cs.setFlag((int) (Math.random() * 10));
+                course.add(cs);
+                Log.d(TAG, "initData:"+cs.getWeekList());
+            }
+        }
+        DataSupport.deleteAll(ClassSchedule.class);
+        DataSupport.saveAll(course);
+        progressDialog.dismiss();
+        Toast.makeText(LeadActivity.this, "获取成功,请返回主界面后下拉刷新", Toast.LENGTH_SHORT).show();
+        finish();
+
     }
-    private void showGetProgress(){
+    private int strToInt(String str){
+        str=str.replace("  ","");
+        str=str.replace(" ","");
+        try{
+            int number  = Integer.valueOf(str);
+            return number;
+        }catch (NumberFormatException e){
+            return 0;
+        }
+
+    }
+    private void showProgress(){
         progressDialog = new ProgressDialog(LeadActivity.this);
         progressDialog.setMessage("获取中");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
+
+   /*private String generateWeekList(String str){
+
+        String  st1="  1,3,5,7,9,11,13,15,17周上";
+        String  st2="  1-18周上";
+        String  st3="  2,4,6,8,10,12,14,16周上";
+        String  st4="  1-16周上";
+        String  st5="  1-20周";
+        String  st6="  3-16周上";
+
+        if (str.equals(st1)){
+            return "1,3,5,7,9,11,13,15,17,";
+        }
+        if (str.equals(st2)){
+            return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,";
+        }
+        if (str.equals(st3)){
+            return "2,4,6,8,10,12,14,16,";
+        }
+        if (str.equals(st4)){
+            return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,";
+        }
+        if (str.equals(st5)){
+            return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,";
+        }
+        if (str.equals(st6)){
+            return "3,4,5,6,7,8,9,10,11,12,13,14,15,16,";
+        }
+        return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,";
+    }*/
 }

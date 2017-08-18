@@ -61,6 +61,7 @@ import site.imcu.lcus.Theme.ThemeHelper;
 
 
 public class MainActivity extends AppCompatActivity implements CardPickerDialog.ClickListener{
+    private static final String TAG = "MainActivity";
     @BindView(R.id.weekNames)
     LinearLayout weekNames;
 
@@ -72,8 +73,9 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
 
     @BindViews({R.id.weekPanel_1, R.id.weekPanel_2, R.id.weekPanel_3, R.id.weekPanel_4, R.id.weekPanel_5})
     List<LinearLayout> mWeekViews;
-    private int itemHeight;
+
     int maxSection = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,11 +94,11 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
      * 第一次启动处理
      */
     private void whenFirst(){
-        copyFileOrDir("tessdata");
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         boolean isFirstRun=sharedPreferences.getBoolean("isFirst", true);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         if(isFirstRun){
+            copyFileOrDir("tessdata");
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
             editor.putBoolean("isFirst", false);
@@ -264,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
      * 初始化课程表
      */
     private void initWeekCourseView() {
+
         for (int i = 0; i < mWeekViews.size(); i++) {
             initWeekPanel(mWeekViews.get(i), CourseDao.getCourseData()[i]);
         }
@@ -336,7 +339,6 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
                 str = unit[j] + str;
                 if ((l != 0 && r == 0) || r != 0)
                     str = zh[r] + str;
-                continue;
             }
         }
         if (str.equals("七"))
@@ -346,7 +348,7 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
 
     public void initWeekPanel(LinearLayout ll, List<ClassSchedule> data) {
 
-        itemHeight = getResources().getDimensionPixelSize(R.dimen.sectionHeight);
+        int itemHeight = getResources().getDimensionPixelSize(R.dimen.sectionHeight);
 
         if (ll == null || data == null || data.size() < 1)
             return;
@@ -377,13 +379,13 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
             tv.setGravity(Gravity.CENTER);
             tv.setTextSize(12);
             tv.setTextColor(Color.parseColor("#FFFFFF"));
-            tv.setText(courseModel.getName() + "\n @" + courseModel.getLocation());
-
+            tv.setText(courseModel.getName() + "\n @" + courseModel.getLocation()+"\n @"+courseModel.getTeacher());
             frameLayout.setLayoutParams(frameLp);
             frameLayout.addView(tv);
             frameLayout.setPadding(2, 2, 2, 2);
             ll.addView(frameLayout);
             firstCourse = courseModel;
+            Log.d(TAG, "initWeekPanel: "+courseModel.getWeekList());
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -403,7 +405,6 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
-
     /**
      * 哔哩哔哩主题设置
      */
@@ -465,6 +466,15 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
         return getResources().getString(getResources().getIdentifier(
                 "magicasrkura_prompt_" + random.nextInt(3), "string", getPackageName())) + ThemeHelper.getName(current);
     }
+
+    /*private int getWeekOfYear(){
+        Calendar cal = Calendar.getInstance();
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        cal.setMinimalDaysInFirstWeek(7);
+        cal.setTime(new Date());
+        return cal.get(Calendar.WEEK_OF_YEAR);
+    }*/
 
 
 }

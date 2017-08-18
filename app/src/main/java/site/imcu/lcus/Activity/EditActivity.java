@@ -1,6 +1,7 @@
 package site.imcu.lcus.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +21,10 @@ public class EditActivity extends AppCompatActivity {
 
     EditText edit_name;
     EditText edit_location;
+    EditText edit_teacher;
     EditText edit_span;
+    EditText edit_weekList;
+    EditText edit_note;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +64,15 @@ public class EditActivity extends AppCompatActivity {
         edit_name = (EditText) findViewById(R.id.edit_name);
         edit_location=(EditText)findViewById(R.id.edit_location);
         edit_span=(EditText) findViewById(R.id.edit_span);
+        edit_teacher=(EditText)findViewById(R.id.edit_teacher);
+        edit_weekList=(EditText)findViewById(R.id.edit_weekList);
+        edit_note=(EditText)findViewById(R.id.edit_note);
         List<ClassSchedule> classSchedules = DataSupport.where("week = ? and order = ?",String.valueOf(a),String.valueOf(b)).find(ClassSchedule.class);
         edit_name.setText(classSchedules.get(0).getName());
         edit_location.setText(classSchedules.get(0).getLocation());
+        edit_teacher.setText(classSchedules.get(0).getTeacher());
+        edit_weekList.setText(classSchedules.get(0).getWeekList());
+        edit_note.setText(classSchedules.get(0).getNote());
         int span = classSchedules.get(0).getSpan();
         edit_span.setText(String.valueOf(span));
     }
@@ -77,6 +87,9 @@ public class EditActivity extends AppCompatActivity {
         ClassSchedule classSchedule = new ClassSchedule();
         classSchedule.setName(edit_name.getText().toString());
         classSchedule.setLocation(edit_location.getText().toString());
+        classSchedule.setTeacher(edit_teacher.getText().toString());
+        classSchedule.setWeekList(edit_weekList.getText().toString());
+        classSchedule.setNote(edit_note.getText().toString());
         classSchedule.setSpan(Integer.parseInt(edit_span.getText().toString()));
         if(checkData(classSchedule)){
             classSchedule.updateAll("week = ? and order = ?",String.valueOf(a),String.valueOf(b));

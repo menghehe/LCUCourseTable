@@ -19,22 +19,23 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
     private List<Score> mScoreList;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView course;
-        TextView score;
-        TextView sbjg;
-        TextView cbjg;
+        TextView courseNameView;
+        TextView creditView;
+        TextView courseAttrView;
+        TextView markView;
+        TextView positionView;
 
-        public ViewHolder(View view){
+        private ViewHolder(View view){
             super(view);
-            course=(TextView)view.findViewById(R.id.course);
-            score=(TextView)view.findViewById(R.id.score);
-            sbjg=(TextView)view.findViewById(R.id.sbjg);
-            cbjg=(TextView)view.findViewById(R.id.cbjg);
-
+            courseNameView=(TextView)view.findViewById(R.id.item_name);
+            creditView=(TextView)view.findViewById(R.id.item_credit);
+            courseAttrView=(TextView)view.findViewById(R.id.item_attr);
+            markView=(TextView)view.findViewById(R.id.item_mark);
+            positionView=(TextView)view.findViewById(R.id.item_position);
         }
     }
-    public ScoreAdapter(List<Score> scorelist){
-        mScoreList=scorelist;
+    public ScoreAdapter(List<Score> scoreList){
+        mScoreList=scoreList;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
@@ -46,10 +47,11 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder,int position){
         Score score = mScoreList.get(position);
-        holder.course.setText(score.getKcm());
-        holder.score.setText(score.getCj());
-        holder.cbjg.setText("曾不及格"+score.getCbjg().toString());
-        holder.sbjg.setText("尚不及格" + score.getSbjg().toString());
+        holder.courseNameView.setText(score.getCourseName());
+        holder.creditView.setText(score.getCredit());
+        holder.courseAttrView.setText(score.getCourseAttr());
+        holder.markView.setText(score.getMark());
+        holder.positionView.setText(score.getPosition());
     }
     @Override
     public int getItemCount(){

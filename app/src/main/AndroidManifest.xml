@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="site.imcu.lcus">
+    package="site.imcu.lcus" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,10 +11,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/lcus"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="聊大课表">
+            android:label="聊大课表" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +37,8 @@
         <activity
             android:name=".Activity.LeadActivity"
             android:label="导入课程" />
-
+        <activity android:name=".Score.Score_This_Activity" >
+        </activity>
     </application>
 
 </manifest>

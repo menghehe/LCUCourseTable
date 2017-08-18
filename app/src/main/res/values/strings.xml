@@ -24,9 +24,15 @@
     <string name="litepal">LitePalFramework/LitePal</string>
     <string name="venshine">venshine/WheelView</string>
     <string name="urp">Risid/URP </string>
-	<string name="tess">rmtheis/tess-two </string>
-	<string name="okhttp">square/okhttp</string>
+    <string name="tess">rmtheis/tess-two </string>
+    <string name="okhttp">square/okhttp</string>
     <string name="about_card1_message">聊大课表——😋这是一个练习应用😋</string>
 
 
+	<!-- String related to themepick -->
+	
+	<string name="theme_title">主题选择</string>
+    <string name="theme_confirm">确认</string>
+    <string name="theme_cancel">取消</string>
+	
 </resources>

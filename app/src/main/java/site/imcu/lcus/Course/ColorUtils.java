@@ -29,6 +29,8 @@ public class ColorUtils {
                 return Color.parseColor("#a9e2a0");
             case 9:
                 return Color.parseColor("#70cec7");
+            case 10:
+                return Color.parseColor("#000000");
             default:
                 return Color.GRAY;
         }

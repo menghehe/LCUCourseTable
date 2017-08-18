@@ -5,94 +5,49 @@ package site.imcu.lcus.Score;
  */
 
 public class Score {
-    private String kch;
-    private String kxh;
-    private String kcm;
-    private String ywkcm;
-    private String xf;
-    private String kcxs;
-    private String cj;
-    private String cjmx;
-    private Boolean sbjg;
-    private Boolean cbjg;
+    private String courseName;
+    private String credit;
+    private String courseAttr;
+    private String mark;
+    private String position;
 
-    public String getKch() {
-        return kch;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setKch(String kch) {
-        this.kch = kch;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public String getKxh() {
-        return kxh;
+    public String getCredit() {
+        return credit;
     }
 
-    public Boolean getSbjg() {
-        return sbjg;
+    public void setCredit(String credit) {
+        this.credit = credit;
     }
 
-    public void setSbjg(Boolean sbjg) {
-        this.sbjg = sbjg;
+    public String getCourseAttr() {
+        return courseAttr;
     }
 
-    public Boolean getCbjg() {
-        return cbjg;
+    public void setCourseAttr(String courseAttr) {
+        this.courseAttr = courseAttr;
     }
 
-    public void setCbjg(Boolean cbjg) {
-        this.cbjg = cbjg;
+    public String getMark() {
+        return mark;
     }
 
-    public void setKxh(String kxh) {
-        this.kxh = kxh;
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 
-    public String getKcm() {
-        return kcm;
+    public String getPosition() {
+        return position;
     }
 
-    public void setKcm(String kcm) {
-        this.kcm = kcm;
-    }
-
-    public String getYwkcm() {
-        return ywkcm;
-    }
-
-    public void setYwkcm(String ywkcm) {
-        this.ywkcm = ywkcm;
-    }
-
-    public String getXf() {
-        return xf;
-    }
-
-    public void setXf(String xf) {
-        this.xf = xf;
-    }
-
-    public String getKcxs() {
-        return kcxs;
-    }
-
-    public void setKcxs(String kcxs) {
-        this.kcxs = kcxs;
-    }
-
-    public String getCj() {
-        return cj;
-    }
-
-    public void setCj(String cj) {
-        this.cj = cj;
-    }
-
-    public String getCjmx() {
-        return cjmx;
-    }
-
-    public void setCjmx(String cjmx) {
-        this.cjmx = cjmx;
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

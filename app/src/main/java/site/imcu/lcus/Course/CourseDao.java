@@ -15,7 +15,6 @@ public class CourseDao {
     public static List<ClassSchedule>[] getCourseData() {
 
         List<ClassSchedule> courseModels[] = new ArrayList[7];
-
         for (int i = 0; i < courseModels.length; i++) {
             courseModels[i] = new ArrayList<>();
         }
