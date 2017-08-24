@@ -10,10 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/toolbar" />
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </LinearLayout>
 
     <com.bilibili.magicasakura.widgets.TintLinearLayout
@@ -52,7 +48,7 @@
 
                 android:layout_width="match_parent"
 
-                android:layout_height="1dp"
+                android:layout_height="0dp"
 
                 android:background="@drawable/divider"/>
 
@@ -72,16 +68,15 @@
 
                 android:layout_height="wrap_content">
 
-
                 <ScrollView
-
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content">
 
 
 
                     <LinearLayout
+
+                        android:baselineAligned="false"
 
                         android:layout_width="match_parent"
 
@@ -178,9 +173,8 @@
 
                     </LinearLayout>
 
-
-
                 </ScrollView>
+
 
             </com.cjj.MaterialRefreshLayout>
 

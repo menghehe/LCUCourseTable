@@ -1,7 +1,6 @@
-package site.imcu.lcus.Activity;
+package site.imcu.lcus.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
-import site.imcu.lcus.Course.ClassSchedule;
+import site.imcu.lcus.course.ClassSchedule;
 import site.imcu.lcus.R;
 
 public class EditActivity extends AppCompatActivity {

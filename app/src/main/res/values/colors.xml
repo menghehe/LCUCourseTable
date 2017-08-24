@@ -61,6 +61,14 @@
     <color name="teal_dark">#00796B</color>
     <color name="teal_trans">#64FFDA</color>
 
+    <color name="lime">#CDDC39</color>
+    <color name="lime_dark">#AFB42B</color>
+    <color name="lime_trans">#D4E157</color>
+    
+    <color name="cyan">#00BCD4</color>
+    <color name="cyan_dark">#0097A7</color>
+    <color name="cyan_trans">#26C6DA</color>
+
     <color name="black_overlay">#66000000</color>
 
 </resources>

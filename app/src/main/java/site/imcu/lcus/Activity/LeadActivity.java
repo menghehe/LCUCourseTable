@@ -1,4 +1,4 @@
-package site.imcu.lcus.Activity;
+package site.imcu.lcus.activity;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -28,9 +28,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import site.imcu.lcus.Course.ClassSchedule;
+import site.imcu.lcus.course.ClassSchedule;
 import site.imcu.lcus.R;
-import site.imcu.lcus.Utils.LoginUtils;
+import site.imcu.lcus.utils.LoginUtils;
 
 public class LeadActivity extends AppCompatActivity {
     private static final String TAG = "LeadActivity";

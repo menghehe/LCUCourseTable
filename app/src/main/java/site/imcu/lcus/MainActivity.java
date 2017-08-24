@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -19,7 +20,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,23 +45,22 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
-import site.imcu.lcus.Activity.AboutActivity;
-import site.imcu.lcus.Activity.AddActivity;
-import site.imcu.lcus.Activity.EditActivity;
-import site.imcu.lcus.Activity.LeadActivity;
-import site.imcu.lcus.Activity.LoginActivity;
-import site.imcu.lcus.Activity.ScoreActivity;
-import site.imcu.lcus.Course.ClassSchedule;
-import site.imcu.lcus.Course.ColorUtils;
-import site.imcu.lcus.Course.CornerTextView;
-import site.imcu.lcus.Course.CourseDao;
-import site.imcu.lcus.Theme.CardPickerDialog;
-import site.imcu.lcus.Theme.SnackAnimationUtil;
-import site.imcu.lcus.Theme.ThemeHelper;
+import site.imcu.lcus.activity.AboutActivity;
+import site.imcu.lcus.activity.AddActivity;
+import site.imcu.lcus.activity.EditActivity;
+import site.imcu.lcus.activity.LeadActivity;
+import site.imcu.lcus.activity.LoginActivity;
+import site.imcu.lcus.activity.ScoreActivity;
+import site.imcu.lcus.course.ClassSchedule;
+import site.imcu.lcus.course.ColorUtils;
+import site.imcu.lcus.course.CornerTextView;
+import site.imcu.lcus.course.CourseDao;
+import site.imcu.lcus.theme.CardPickerDialog;
+import site.imcu.lcus.theme.SnackAnimationUtil;
+import site.imcu.lcus.theme.ThemeHelper;
 
 
 public class MainActivity extends AppCompatActivity implements CardPickerDialog.ClickListener{
-    private static final String TAG = "MainActivity";
     @BindView(R.id.weekNames)
     LinearLayout weekNames;
 
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        whenFirst();
         setToolBar();
         ButterKnife.bind(this);
         initWeekNameView();
@@ -88,8 +86,9 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
         initWeekCourseView();
         setRefreshListener();
         setNavListener();
-
+        whenFirst();
     }
+
     /**
      * 第一次启动处理
      */
@@ -107,12 +106,13 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
     }
     private void copyFileOrDir(String path) {
         AssetManager assetManager = this.getAssets();
-        String assets[] = null;
+        String assets[];
         try {
             assets = assetManager.list(path);
             if (assets.length == 0) {
                 copyFile(path);
             } else {
+
                 String fullPath = "/data/data/" + this.getPackageName() + "/" + path;
                 File dir = new File(fullPath);
                 if (!dir.exists())
@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
             Log.e("tag", "I/O Exception", ex);
         }
     }
-
     private void copyFile(String filename) {
         AssetManager assetManager = this.getAssets();
 
@@ -153,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
         }
 
     }
+
+
     /**
      * 抽屉listener
      */
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
                         intent.setClass(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         break;
-                    case R.id.nav_jwxt:
+                    case R.id.nav_eduSystem:
                         intent.setClass(MainActivity.this, LeadActivity.class);
                         startActivity(intent);
                         break;
@@ -186,6 +187,17 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
                         intent.setClass(MainActivity.this, AboutActivity.class);
                         startActivity(intent);
                         break;
+                    case R.id.nav_theme:
+                        CardPickerDialog dialog = new CardPickerDialog();
+                        dialog.setClickListener(MainActivity.this);
+                        dialog.show(getSupportFragmentManager(), CardPickerDialog.TAG);
+                        break;
+                    case R.id.nav_upData:
+                        intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("https://www.coolapk.com/apk/site.imcu.lcus"));
+                        startActivity(intent);
+                        break;
+
                 }
                 return false;
             }
@@ -385,7 +397,6 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
             frameLayout.setPadding(2, 2, 2, 2);
             ll.addView(frameLayout);
             firstCourse = courseModel;
-            Log.d(TAG, "initWeekPanel: "+courseModel.getWeekList());
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -409,30 +420,12 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
      * 哔哩哔哩主题设置
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.change_theme:
-                CardPickerDialog dialog = new CardPickerDialog();
-                dialog.setClickListener(this);
-                dialog.show(getSupportFragmentManager(), CardPickerDialog.TAG);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    @Override
     public void onConfirm(int currentTheme) {
         if (ThemeHelper.getTheme(MainActivity.this) != currentTheme) {
             ThemeHelper.setTheme(MainActivity.this, currentTheme);
             ThemeUtils.refreshUI(MainActivity.this, new ThemeUtils.ExtraRefreshable() {
                         @Override
                         public void refreshGlobal(Activity activity) {
-                            //for global setting, just do once
                             if (Build.VERSION.SDK_INT >= 21) {
                                 final MainActivity context = MainActivity.this;
                                 ActivityManager.TaskDescription taskDescription =
@@ -475,7 +468,6 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
         cal.setTime(new Date());
         return cal.get(Calendar.WEEK_OF_YEAR);
     }*/
-
 
 }
 

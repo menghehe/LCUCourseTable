@@ -28,9 +28,9 @@
 
             <include layout="@layout/card_about1" />
 
-
-
             <include layout="@layout/card_about2" />
+
+            <include layout="@layout/card_about3"/>
 
 
 

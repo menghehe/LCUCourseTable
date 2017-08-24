@@ -34,7 +34,7 @@
 
 
 
-        <ImageView
+        <com.bilibili.magicasakura.widgets.TintImageView
 
             android:id="@+id/img_card_about_1"
 
@@ -45,7 +45,7 @@
             android:background="@color/gray_very_light"
             android:scaleType="center"
 
-            android:src="@mipmap/lcus" />
+            android:src="@drawable/mgithub" />
 
 
 
@@ -67,13 +67,15 @@
 
             <com.bilibili.magicasakura.widgets.TintTextView
 
-                android:id="@+id/tv_card_about_1_1"
+                android:id="@+id/my_git"
 
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
 
-                android:text="@string/about_card1_message"
+                android:text="@string/about_card3_message"
+
+                android:textSize="35sp"
 
                 android:textColor="@color/theme_color_primary_trans"
 

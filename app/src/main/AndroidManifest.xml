@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="site.imcu.lcus" >
+    package="site.imcu.lcus">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".Theme.MyApplication"
+        android:name=".theme.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/lcus"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/lcus"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="聊大课表" >
+            android:label="聊大课表">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,23 +22,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/login_get" />
         <activity
-            android:name=".Activity.AddActivity"
+            android:name=".activity.AddActivity"
             android:label="@string/add_course" />
         <activity
-            android:name=".Activity.EditActivity"
+            android:name=".activity.EditActivity"
             android:label="@string/edit_course" />
-        <activity android:name=".Activity.AboutActivity" />
         <activity
-            android:name=".Activity.ScoreActivity"
-            android:label="成绩查询" />
+            android:name=".activity.AboutActivity"/>
         <activity
-            android:name=".Activity.LeadActivity"
-            android:label="导入课程" />
-        <activity android:name=".Score.Score_This_Activity" >
-        </activity>
+            android:name=".activity.ScoreActivity"
+            android:label="@string/score_read" />
+        <activity
+            android:name=".activity.LeadActivity"
+            android:label="@string/course_lead" />
+        <activity
+            android:name=".score.Score_This_Activity"
+            android:label="@string/score_this"/>
+        <activity
+            android:name=".score.Score_Fail_Activity"
+            android:label="@string/score_fail"/>
+        <activity
+            android:name=".score.Score_All_Activity"
+            android:label="@string/score_all"/>
     </application>
 
 </manifest>

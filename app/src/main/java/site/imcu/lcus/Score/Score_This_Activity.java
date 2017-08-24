@@ -1,4 +1,4 @@
-package site.imcu.lcus.Score;
+package site.imcu.lcus.score;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -24,7 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import site.imcu.lcus.R;
-import site.imcu.lcus.Utils.LoginUtils;
+import site.imcu.lcus.utils.LoginUtils;
 
 public class Score_This_Activity extends AppCompatActivity {
 

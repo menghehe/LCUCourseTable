@@ -1,4 +1,4 @@
-package site.imcu.lcus.Score;
+package site.imcu.lcus.score;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import java.util.List;
 import site.imcu.lcus.R;
 
 /**
- * Created by mengh on 2017/8/9.
+ * Created by SHIELD_7 on 2017/8/9
  */
 
-public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
+ class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
 
     private List<Score> mScoreList;
 
@@ -34,7 +34,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
             positionView=(TextView)view.findViewById(R.id.item_position);
         }
     }
-    public ScoreAdapter(List<Score> scoreList){
+    ScoreAdapter(List<Score> scoreList){
         mScoreList=scoreList;
     }
     @Override
@@ -42,7 +42,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.score_item,parent,false);
         ViewHolder holder = new ViewHolder(view);
-        return  holder;
+        return holder;
     }
     @Override
     public void onBindViewHolder(ViewHolder holder,int position){

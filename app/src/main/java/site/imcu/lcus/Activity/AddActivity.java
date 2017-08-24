@@ -1,4 +1,4 @@
-package site.imcu.lcus.Activity;
+package site.imcu.lcus.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +16,11 @@ import org.litepal.crud.DataSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-import site.imcu.lcus.Course.ClassSchedule;
+import site.imcu.lcus.course.ClassSchedule;
 import site.imcu.lcus.R;
 
 
 public class AddActivity extends AppCompatActivity {
-
 
     WheelView weekView;
     WheelView orderView;
@@ -75,6 +74,7 @@ public class AddActivity extends AppCompatActivity {
         else if(classScheduleList.size()!=0){
             Toast.makeText(AddActivity.this,"当前节已存在课程",Toast.LENGTH_SHORT).show();
             return false;
+
         }
         else if (classSchedule.getSpan()!=1&&classSchedule.getSpan()!=2){
             Toast.makeText(AddActivity.this,"课程长度只有一节或者两节",Toast.LENGTH_SHORT).show();
@@ -92,9 +92,9 @@ public class AddActivity extends AppCompatActivity {
         String week_4 = "周四";week.add(week_4);
         String week_5 = "周五";week.add(week_5);
         weekView = (WheelView) findViewById(R.id.chose_week);
-        weekView.setWheelAdapter(new ArrayWheelAdapter(this)); // 文本数据源
-        weekView.setSkin(WheelView.Skin.None); // common皮肤
-        weekView.setWheelData(week);  // 数据集合
+        weekView.setWheelAdapter(new ArrayWheelAdapter(this));
+        weekView.setSkin(WheelView.Skin.None);
+        weekView.setWheelData(week);
         List<String> order = new ArrayList<>();
         String one = "一";order.add(one);
         String two = "二";order.add(two);
@@ -107,13 +107,13 @@ public class AddActivity extends AppCompatActivity {
         String nin = "九";order.add(nin);
         String ten = "十";order.add(ten);
         orderView = (WheelView) findViewById(R.id.chose_order);
-        orderView.setWheelAdapter(new ArrayWheelAdapter(this)); // 文本数据源
-        orderView.setSkin(WheelView.Skin.None); // common皮肤
-        orderView.setWheelData(order);  // 数据集合
+        orderView.setWheelAdapter(new ArrayWheelAdapter(this));
+        orderView.setSkin(WheelView.Skin.None);
+        orderView.setWheelData(order);
         spanView = (WheelView) findViewById(R.id.chose_span);
-        spanView.setWheelAdapter(new ArrayWheelAdapter(this)); // 文本数据源
-        spanView.setSkin(WheelView.Skin.None); // common皮肤
-        spanView.setWheelData(order);  // 数据集合
+        spanView.setWheelAdapter(new ArrayWheelAdapter(this));
+        spanView.setSkin(WheelView.Skin.None);
+        spanView.setWheelData(order);
     }
 
     private int getWeek(){

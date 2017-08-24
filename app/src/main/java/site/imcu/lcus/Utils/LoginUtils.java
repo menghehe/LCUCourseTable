@@ -1,8 +1,7 @@
-package site.imcu.lcus.Utils;
+package site.imcu.lcus.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Message;
 import android.util.Log;
 
 import com.googlecode.leptonica.android.Binarize;
@@ -25,7 +24,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by mengh on 2017/8/12.
+ * Created by SHIELD_7 on 2017/8/12.
+ * login
  */
 
 public class LoginUtils {
@@ -33,8 +33,8 @@ public class LoginUtils {
             try {
                 String session;
                 OkHttpClient client = new OkHttpClient();
-                Request requestyzm = new Request.Builder().url("http://jwcweb.lcu.edu.cn/validateCodeAction.do").build();
-                Response response = client.newCall(requestyzm).execute();
+                Request requestYzm = new Request.Builder().url("http://jwcweb.lcu.edu.cn/validateCodeAction.do").build();
+                Response response = client.newCall(requestYzm).execute();
                 byte[] pic = response.body().bytes();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(pic, 0, pic.length);
 
@@ -63,9 +63,9 @@ public class LoginUtils {
                         .addHeader("cookie", session)
                         .post(body)
                         .build();
-                Response responselogin = client.newCall(request).execute();
+                Response responseLogin = client.newCall(request).execute();
 
-                String responseData = responselogin.body().string();
+                String responseData = responseLogin.body().string();
                 Document document = Jsoup.parse(responseData);
                 Element element = document.select("title").first();
                 if (element.text().equals("学分制综合教务")) {
@@ -87,8 +87,10 @@ public class LoginUtils {
                         .addHeader("cookie", session)
                         .build();
                 Response response = client.newCall(request1).execute();
+
                 String html = response.body().string();
                 return html;
+
             } catch (Exception e) {
                 e.printStackTrace();
                 return "null";

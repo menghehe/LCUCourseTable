@@ -1,26 +1,17 @@
-package site.imcu.lcus.Activity;
+package site.imcu.lcus.activity;
 
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bilibili.magicasakura.utils.ThemeUtils;
 
 import site.imcu.lcus.R;
 
@@ -39,7 +30,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     }
     public void initView() {
 
-        TextView gitadress = (TextView) findViewById(R.id.gitadress);
+        TextView gitAddress = (TextView) findViewById(R.id.my_git);
         LinearLayout tess = (LinearLayout) findViewById(R.id.tess);
         LinearLayout urp= (LinearLayout) findViewById(R.id.urp);
 
@@ -62,7 +53,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         coursetable.setOnClickListener(this);
         urp.setOnClickListener(this);
         tess.setOnClickListener(this);
-        gitadress.setOnClickListener(this);
+        gitAddress.setOnClickListener(this);
 
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setDuration(300);
@@ -106,7 +97,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 intent.setData(Uri.parse("https://github.com/rmtheis/tess-two"));
                 startActivity(intent);
                 break;
-            case R.id.gitadress:
+            case R.id.my_git:
                 intent.setData(Uri.parse("https://github.com/SHIELD7/LcuCourseTable"));
                 startActivity(intent);
                 break;

@@ -168,7 +168,39 @@
             android:layout_weight="1"
             android:visibility="invisible" />
 
+        <com.bilibili.magicasakura.widgets.TintImageView
+            android:id="@+id/theme_lime"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/lime" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
+        <com.bilibili.magicasakura.widgets.TintImageView
+            android:id="@+id/theme_cyan"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/cyan" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
+
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/buttonPanel"

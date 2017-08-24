@@ -1,25 +1,8 @@
-/*
- * Copyright (C) 2016 Bilibili
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package site.imcu.lcus.Theme;
+package site.imcu.lcus.theme;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,17 +10,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import site.imcu.lcus.R;
-import site.imcu.lcus.Theme.ThemeHelper;
 
-
-/**
- * @author xyczero
- * @time 16/5/29
- */
 public class
 CardPickerDialog extends DialogFragment implements View.OnClickListener {
     public static final String TAG = "CardPickerDialog";
-    ImageView[] mCards = new ImageView[9];
+    ImageView[] mCards = new ImageView[11];
     Button mConfirm;
     Button mCancel;
 
@@ -71,6 +48,8 @@ CardPickerDialog extends DialogFragment implements View.OnClickListener {
         mCards[6] = (ImageView) view.findViewById(R.id.theme_orange);
         mCards[7] = (ImageView) view.findViewById(R.id.theme_red);
         mCards[8] = (ImageView) view.findViewById(R.id.theme_teal);
+        mCards[9] = (ImageView) view.findViewById(R.id.theme_lime);
+        mCards[10] = (ImageView) view.findViewById(R.id.theme_cyan);
         setImageButtons(mCurrentTheme);
         for (ImageView card : mCards) {
             card.setOnClickListener(this);
@@ -125,6 +104,14 @@ CardPickerDialog extends DialogFragment implements View.OnClickListener {
                 mCurrentTheme = ThemeHelper.CARD_TEAL;
                 setImageButtons(mCurrentTheme);
                 break;
+            case R.id.theme_lime:
+                mCurrentTheme = ThemeHelper.CARD_LIME;
+                setImageButtons(mCurrentTheme);
+                break;
+            case R.id.theme_cyan:
+                mCurrentTheme = ThemeHelper.CARD_CYAN;
+                setImageButtons(mCurrentTheme);
+                break;
             default:
                 break;
         }
@@ -140,6 +127,8 @@ CardPickerDialog extends DialogFragment implements View.OnClickListener {
         mCards[6].setSelected(currentTheme == ThemeHelper.CARD_SAND);
         mCards[7].setSelected(currentTheme == ThemeHelper.CARD_FIREY);
         mCards[8].setSelected(currentTheme == ThemeHelper.CARD_TEAL);
+        mCards[9].setSelected(currentTheme == ThemeHelper.CARD_LIME);
+        mCards[10].setSelected(currentTheme == ThemeHelper.CARD_CYAN);
     }
 
     public void setClickListener(ClickListener clickListener) {

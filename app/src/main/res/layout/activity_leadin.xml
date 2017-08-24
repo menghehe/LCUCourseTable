@@ -1,12 +1,11 @@
 <com.bilibili.magicasakura.widgets.TintLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="site.imcu.lcus.Activity.LeadActivity">
+    tools:context="site.imcu.lcus.activity.LeadActivity">
     <include layout="@layout/toolbar"/>
     <com.bilibili.magicasakura.widgets.TintLinearLayout
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="获取课程表"
+            android:text="@string/lead_get"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginTop="15dp"
@@ -64,7 +63,7 @@
 
 
 
-                <ImageView
+                <com.bilibili.magicasakura.widgets.TintImageView
 
                     android:id="@+id/img_card_about_1"
 
@@ -102,7 +101,7 @@
 
                         android:layout_height="wrap_content"
 
-                        android:text="该操作会清空当前课程表"
+                        android:text="@string/lead_tip"
 
                         android:textColor="@color/theme_color_primary_trans"
 

@@ -1,9 +1,10 @@
-package site.imcu.lcus.Course;
+package site.imcu.lcus.course;
 
 import android.graphics.Color;
 
 /**
- * Created by mengh on 2017/8/1.
+ * Created by SHIELD_7 on 2017/8/1.
+ *
  */
 
 public class ColorUtils {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="site.imcu.lcus.Activity.LoginActivity">
+    tools:context="site.imcu.lcus.activity.LoginActivity">
     <include layout="@layout/toolbar"/>
     <com.bilibili.magicasakura.widgets.TintLinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:drawablePadding="@dimen/padding_half"
                 android:maxLines="1"
                 android:padding="@dimen/padding_half"
-                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="13sp"
                 app:backgroundTint="@color/selector_focus"
                 app:drawableLeftTint="@color/selector_focus" />
@@ -48,7 +48,7 @@
                 android:drawableLeft="@drawable/location"
                 android:drawablePadding="@dimen/padding_half"
                 android:padding="@dimen/padding_half"
-                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="13sp"
                 app:backgroundTint="@color/selector_focus"
                 app:drawableLeftTint="@color/selector_focus"/>
@@ -57,7 +57,7 @@
                 android:id="@+id/edit_teacher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="授课教师"
+                android:hint="@string/edit_teacher"
                 android:inputType="text"
                 android:maxLength="20"
                 android:maxLines="1"
@@ -65,7 +65,7 @@
                 android:drawableLeft="@drawable/person"
                 android:drawablePadding="@dimen/padding_half"
                 android:padding="@dimen/padding_half"
-                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="13sp"
                 app:backgroundTint="@color/selector_focus"
                 app:drawableLeftTint="@color/selector_focus"/>
@@ -82,7 +82,7 @@
                 android:drawableLeft="@drawable/span"
                 android:drawablePadding="@dimen/padding_half"
                 android:padding="@dimen/padding_half"
-                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="13sp"
                 app:backgroundTint="@color/selector_focus"
                 app:drawableLeftTint="@color/selector_focus"/>
@@ -91,18 +91,17 @@
                 android:id="@+id/edit_weekList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="上课周次"
+                android:hint="@string/edit_week_list"
                 android:inputType="text"
-                android:maxLength="20"
                 android:maxLines="1"
                 android:background="@drawable/ic_edit_text_default"
-                android:drawableLeft="@drawable/weeklist"
+                android:drawableLeft="@drawable/week_list"
                 android:drawablePadding="@dimen/padding_half"
                 android:padding="@dimen/padding_half"
-                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="13sp"
                 app:backgroundTint="@color/selector_focus"
-                app:drawableLeftTint="@color/selector_focus"/>
+                app:drawableLeftTint="@color/selector_focus"/>L
 
         </com.bilibili.magicasakura.widgets.TintLinearLayout>
 
@@ -143,7 +142,7 @@
 
 
 
-            <ImageView
+            <com.bilibili.magicasakura.widgets.TintImageView
 
                 android:id="@+id/img_card_about_1"
 
@@ -176,13 +175,13 @@
                     android:id="@+id/edit_note"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="便条"
+                    android:hint="@string/edit_note"
                     android:inputType="textMultiLine"
                     android:minLines="5"
                     android:background="@drawable/ic_edit_text_default"
                     android:drawablePadding="@dimen/padding_half"
                     android:padding="@dimen/padding_half"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textCursorDrawable="@drawable/edit_text_cursor"
                     android:textSize="13sp"
                     app:backgroundTint="@color/selector_focus"
                     app:drawableLeftTint="@color/selector_focus"/>

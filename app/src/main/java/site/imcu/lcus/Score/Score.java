@@ -1,53 +1,54 @@
-package site.imcu.lcus.Score;
+package site.imcu.lcus.score;
 
 /**
- * Created by mengh on 2017/8/8.
+ * Created by SHIELD_7 on 2017/8/8.
+ *
  */
 
-public class Score {
+class Score {
     private String courseName;
     private String credit;
     private String courseAttr;
     private String mark;
     private String position;
 
-    public String getCourseName() {
+    String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
-    public String getCredit() {
+    String getCredit() {
         return credit;
     }
 
-    public void setCredit(String credit) {
+    void setCredit(String credit) {
         this.credit = credit;
     }
 
-    public String getCourseAttr() {
+    String getCourseAttr() {
         return courseAttr;
     }
 
-    public void setCourseAttr(String courseAttr) {
+    void setCourseAttr(String courseAttr) {
         this.courseAttr = courseAttr;
     }
 
-    public String getMark() {
+    String getMark() {
         return mark;
     }
 
-    public void setMark(String mark) {
+    void setMark(String mark) {
         this.mark = mark;
     }
 
-    public String getPosition() {
+    String getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    void setPosition(String position) {
         this.position = position;
     }
 }

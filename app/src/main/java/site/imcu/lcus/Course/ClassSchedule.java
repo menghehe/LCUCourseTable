@@ -1,12 +1,10 @@
-package site.imcu.lcus.Course;
+package site.imcu.lcus.course;
 
 import org.litepal.crud.DataSupport;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by mengh on 2017/7/29.
+ * Created by SHIELD_7 on 2017/7/29.
+ *
  */
 
 public class ClassSchedule extends DataSupport{

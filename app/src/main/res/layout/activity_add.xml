@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="site.imcu.lcus.Activity.AddActivity">
+    tools:context="site.imcu.lcus.activity.AddActivity">
     <include layout="@layout/toolbar"/>
     <com.bilibili.magicasakura.widgets.TintLinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:drawablePadding="@dimen/padding_half"
                 android:maxLines="1"
                 android:padding="@dimen/padding_half"
-                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="13sp"
                 app:backgroundTint="@color/selector_focus"
                 app:drawableLeftTint="@color/selector_focus" />
@@ -44,7 +44,7 @@
                 android:drawableLeft="@drawable/location"
                 android:drawablePadding="@dimen/padding_half"
                 android:padding="@dimen/padding_half"
-                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="13sp"
                 app:backgroundTint="@color/selector_focus"
                 app:drawableLeftTint="@color/selector_focus"/>
@@ -60,7 +60,7 @@
             android:drawableLeft="@drawable/person"
             android:drawablePadding="@dimen/padding_half"
             android:padding="@dimen/padding_half"
-            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textCursorDrawable="@drawable/edit_text_cursor"
             android:textSize="13sp"
             app:backgroundTint="@color/selector_focus"
             app:drawableLeftTint="@color/selector_focus"/>
@@ -83,7 +83,7 @@
                     android:layout_height="125sp"
                     android:gravity="center_vertical"
                     android:textStyle="bold"
-                    android:text="第"
+                    android:text="@string/add_tip1"
                     android:textSize="25sp"/>
                 <com.wx.wheelview.widget.WheelView
                     android:id="@+id/chose_order"
@@ -94,7 +94,7 @@
                     android:layout_height="100sp"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
-                    android:text="节至"
+                    android:text="@string/add_tip2"
                     android:textSize="25sp"/>
                 <com.wx.wheelview.widget.WheelView
                     android:id="@+id/chose_span"
@@ -105,7 +105,7 @@
                     android:layout_height="100sp"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
-                    android:text="节"
+                    android:text="@string/add_tip3"
                     android:textSize="25sp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>

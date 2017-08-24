@@ -1,4 +1,4 @@
-package site.imcu.lcus.Activity;
+package site.imcu.lcus.activity;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -20,7 +20,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import site.imcu.lcus.R;
-import site.imcu.lcus.Utils.LoginUtils;
+import site.imcu.lcus.utils.LoginUtils;
 
 public class LoginActivity extends AppCompatActivity {
     private SharedPreferences pref;

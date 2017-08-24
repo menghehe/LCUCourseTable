@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="site.imcu.lcus.Activity.LoginActivity">
+    tools:context="site.imcu.lcus.activity.LoginActivity">
     <include layout="@layout/toolbar" />
     <com.bilibili.magicasakura.widgets.TintLinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                     android:drawablePadding="@dimen/padding_half"
                     android:maxLines="1"
                     android:padding="@dimen/padding_half"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textCursorDrawable="@drawable/edit_text_cursor"
                     android:textSize="13sp"
                     app:backgroundTint="@color/selector_focus"
                     app:drawableLeftTint="@color/selector_focus" />
@@ -48,7 +48,7 @@
                     android:drawableLeft="@drawable/password"
                     android:drawablePadding="@dimen/padding_half"
                     android:padding="@dimen/padding_half"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textCursorDrawable="@drawable/edit_text_cursor"
                     android:textSize="13sp"
                     app:backgroundTint="@color/selector_focus"
                     app:drawableLeftTint="@color/selector_focus"/>
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="登陆"
+                android:text="@string/login_action"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
@@ -103,7 +103,7 @@
 
 
 
-                    <ImageView
+                    <com.bilibili.magicasakura.widgets.TintImageView
 
                         android:id="@+id/img_card_about_1"
 
@@ -141,21 +141,20 @@
 
                             android:layout_height="wrap_content"
 
-                            android:text="其他功能依赖于在此登陆的账号"
+                            android:text="@string/login_tip1"
 
                             android:textColor="@color/theme_color_primary_trans"
 
                             android:textStyle="bold" />
                         <com.bilibili.magicasakura.widgets.TintTextView
 
-                            android:id="@+id/tips"
 
                             android:layout_below="@id/tips1"
                             android:layout_width="wrap_content"
 
                             android:layout_height="wrap_content"
 
-                            android:text="若登陆失败请重试或检查账号设置"
+                            android:text="@string/login_tip2"
 
                             android:textColor="@color/theme_color_primary_trans"
 

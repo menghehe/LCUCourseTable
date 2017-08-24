@@ -3,18 +3,39 @@
     <string name="login_get">登陆</string>
     <string name="add_course">添加课程</string>
     <string name="edit_course">编辑</string>
+    <string name="score_read">成绩查询</string>
+    <string name="score_this">本学期成绩</string>
+    <string name="score_fail">不及格成绩</string>
+    <string name="score_all">全部成绩</string>
+    <string name="score_login">刷新登陆</string>
+    <string name="course_lead">导入课程</string>
+
     <!-- String related to Login -->
+
     <string name="title_activity_login">Login</string>
     <string name="login_user_name_hint">教务系统账号</string>
     <string name="login_user_name_password">密码</string>
-    <string name="login_yzm">点击图片可刷新验证码</string>
-    <string name="action_sign_in">登陆并获取课程表</string>
+    <string name="login_action">登陆</string>
+    <string name="login_tip1">其他功能依赖在此登陆的账号</string>
+    <string name="login_tip2">若登陆失败请重试或者检查账号</string>
+
+    <!-- String related to add&edit -->
 
     <string name="add_name">课程名称</string>
-    <string name="add_week">上课周(1-5)</string>
+    <string name="add_week">上课周(1—5)</string>
     <string name="add_location">上课地点</string>
     <string name="add_save">保存课程</string>
     <string name="edit_span">课程节数</string>
+    <string name="edit_note">便条</string>
+    <string name="edit_teacher">授课教师</string>
+    <string name="edit_week_list">上课周次</string>
+    <string name="add_tip1">第</string>
+    <string name="add_tip2">节至</string>
+    <string name="add_tip3">节</string>
+
+    <!-- String related to lead -->
+    <string name="lead_get">获取课程表</string>
+    <string name="lead_tip">该操作会清空当前课程表</string>
 
     <!-- String related to about -->
     <string name="about_card2_title">感谢以下开源库</string>
@@ -27,12 +48,29 @@
     <string name="tess">rmtheis/tess-two </string>
     <string name="okhttp">square/okhttp</string>
     <string name="about_card1_message">聊大课表——😋这是一个练习应用😋</string>
+    <string name="about_card3_message">开源地址</string>
 
 
-	<!-- String related to themepick -->
-	
-	<string name="theme_title">主题选择</string>
+    <!-- String related to themePick -->
+
+    <string name="theme_title">主题选择</string>
     <string name="theme_confirm">确认</string>
     <string name="theme_cancel">取消</string>
-	
+    
+    <!-- String related to menu -->
+
+    <string name="save">保存</string>
+    <string name="delete">删除</string>
+    
+    <string name="point">绩点计算</string>
+    <string name="rule">计算规则</string>
+    
+    <string name="account">教务账号</string>
+    <string name="lead">从教务系统导入</string>
+    <string name="hand">手动添加</string>
+    <string name="query">成绩查询</string>
+    <string name="upData">检查更新</string>
+    <string name="about">关于</string>
+    <string name="choose_theme">主题选择</string>
+
 </resources>

@@ -1,15 +1,16 @@
-package site.imcu.lcus.Course;
+package site.imcu.lcus.course;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.widget.TextView;
+import android.support.v7.widget.AppCompatTextView;
 
 /**
- * Created by mengh on 17/8/1.
+ * Created by SHIELD_7 on 17/8/1.
+ *
  */
-public class CornerTextView extends TextView {
+public class CornerTextView extends AppCompatTextView{
 
     private int mBgColor = 0; //背景颜色
     private int mCornerSize = 0; //圆角大小

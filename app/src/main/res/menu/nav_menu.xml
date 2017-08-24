@@ -3,19 +3,25 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_account"
-            android:title="教务账号"/>
+            android:title="@string/account"/>
         <item
-            android:id="@+id/nav_jwxt"
-            android:title="从教务系统导入"/>
+            android:id="@+id/nav_eduSystem"
+            android:title="@string/lead"/>
         <item
             android:id="@+id/nav_add"
-            android:title="手动添加"/>
+            android:title="@string/hand"/>
         <item
             android:id="@+id/nav_score"
-            android:title="成绩查询"/>
+            android:title="@string/query"/>
+        <item
+            android:id="@+id/nav_theme"
+            android:title="@string/choose_theme"/>
+        <item
+            android:id="@+id/nav_upData"
+            android:title="@string/upData"/>
         <item
             android:id="@+id/nav_about"
-            android:title="关于"/>
+            android:title="@string/about"/>
     </group>
 
 </menu>
