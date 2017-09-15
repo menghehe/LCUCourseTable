@@ -71,4 +71,8 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="black">#000</color>
+
+    <color name="alpha_gray">#33656565</color>
+
 </resources>

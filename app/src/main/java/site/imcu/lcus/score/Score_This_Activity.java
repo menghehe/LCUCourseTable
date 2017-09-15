@@ -1,5 +1,6 @@
 package site.imcu.lcus.score;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+
+import com.bilibili.magicasakura.widgets.TintProgressDialog;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,9 +32,11 @@ import site.imcu.lcus.utils.LoginUtils;
 
 public class Score_This_Activity extends AppCompatActivity {
 
+    private ScoreAdapter mScoreAdapter;
     private static final String TAG = "Score_This_Activity";
-    private String markUrl= "http://jwcweb.lcu.edu.cn/bxqcjcxAction.do";
+    private String markUrl= "http://210.44.112.125/bxqcjcxAction.do";
     String session;
+    ProgressDialog progressDialog;
     List<Score> scoreList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class Score_This_Activity extends AppCompatActivity {
         session= intent.getStringExtra("session");
         Log.d(TAG, "onCreate: "+session);
         getMark();
+        show();
     }
 
 
@@ -94,11 +101,19 @@ public class Score_This_Activity extends AppCompatActivity {
             score.setCourseAttr(tds.get(5).text());
             score.setMark(tds.get(9).text());
             score.setPosition(tds.get(10).text());
+            score.setDetail("http://210.44.112.125"+getSrc(tds.get(12)));
             scoreList.add(score);
         }
         setRecycle();
+        progressDialog.dismiss();
     }
 
+    private String getSrc(Element element){
+        Elements src = element.select("img");
+        String onclick = src.attr("onclick");
+        String []a=onclick.split("[']");
+        return a[1];
+    }
 
     private void setRecycle(){
 
@@ -108,9 +123,31 @@ public class Score_This_Activity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        ScoreAdapter adapter = new ScoreAdapter(scoreList);
+        mScoreAdapter = new ScoreAdapter(scoreList);
 
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mScoreAdapter);
+        setListener();
 
     }
+    private void show(){
+        progressDialog = new ProgressDialog(Score_This_Activity.this);
+        progressDialog.setTitle("本学期成绩");
+        progressDialog.setMessage("加载中");
+        progressDialog.setProgressStyle(TintProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    private void setListener(){
+        mScoreAdapter.setOnItemClickListener(new ScoreAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(Score_This_Activity.this, Score_Detail_Activity.class);
+                intent.putExtra("session",session);
+                intent.putExtra("url",scoreList.get(position).getDetail());
+                startActivity(intent);
+            }
+        });
+    }
+
 }

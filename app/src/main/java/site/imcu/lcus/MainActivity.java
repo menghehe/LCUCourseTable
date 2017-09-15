@@ -3,6 +3,7 @@ package site.imcu.lcus;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
@@ -14,12 +15,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,9 @@ import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 
+
+import org.joda.time.LocalDate;
+import org.joda.time.Weeks;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -59,7 +65,22 @@ import site.imcu.lcus.theme.CardPickerDialog;
 import site.imcu.lcus.theme.SnackAnimationUtil;
 import site.imcu.lcus.theme.ThemeHelper;
 
-
+//      ┏┛ ┻━━━━━┛ ┻┓
+//      ┃　　　　　　 ┃
+//      ┃　　　━　　　┃
+//      ┃　┳┛　  ┗┳　┃
+//      ┃　　　　　　 ┃
+//      ┃　　　┻　　　┃
+//      ┃　　　　　　 ┃
+//      ┗━┓　　　┏━━━┛
+//        ┃　　　┃   神兽保佑
+//        ┃　　　┃   代码无BUG！
+//        ┃　　　┗━━━━━━━━━┓
+//        ┃　　　　　　　    ┣┓
+//        ┃　　　　         ┏┛
+//        ┗━┓ ┓ ┏━━━┳ ┓ ┏━┛
+//          ┃ ┫ ┫   ┃ ┫ ┫
+//          ┗━┻━┛   ┗━┻━┛
 public class MainActivity extends AppCompatActivity implements CardPickerDialog.ClickListener{
     @BindView(R.id.weekNames)
     LinearLayout weekNames;
@@ -75,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
 
     int maxSection = 10;
 
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,8 +230,8 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
      */
     private  void setToolBar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("聊大课表");
         setSupportActionBar(toolbar);
+        setTitle("聊大课表");
         initDrawerToggle();
     }
     /**
@@ -392,6 +414,9 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
             tv.setTextSize(12);
             tv.setTextColor(Color.parseColor("#FFFFFF"));
             tv.setText(courseModel.getName() + "\n @" + courseModel.getLocation()+"\n @"+courseModel.getTeacher());
+            if(!ifThisWeek(courseModel.getWeekList())){
+                tv.setTextColor(Color.parseColor("#808080"));
+            }
             frameLayout.setLayoutParams(frameLp);
             frameLayout.addView(tv);
             frameLayout.setPadding(2, 2, 2, 2);
@@ -409,6 +434,27 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
         }
     }
 
+    private boolean ifThisWeek(String weekList){
+        SharedPreferences  sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String a[] = weekList.split(",");
+
+        for (int i = 0;i<a.length; i++){
+            if ( strToInt(a[i])==sharedPreferences.getInt("currentWeek",1)){
+                return true;
+            }
+
+        }return false;
+    }
+    private int strToInt(String str){
+        str=str.replace("  ","");
+        str=str.replace(" ","");
+        try{
+            return Integer.valueOf(str);
+        }catch (NumberFormatException e){
+            return 0;
+        }
+
+    }
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
@@ -460,14 +506,73 @@ public class MainActivity extends AppCompatActivity implements CardPickerDialog.
                 "magicasrkura_prompt_" + random.nextInt(3), "string", getPackageName())) + ThemeHelper.getName(current);
     }
 
-    /*private int getWeekOfYear(){
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_weeks_menu,menu);
+        final MenuItem item = menu.findItem(R.id.current_week);
+        initWeekTitle(item);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        showWeekList(item);
+        return super.onOptionsItemSelected(item);
+    }
+    private void showWeekList(final MenuItem item){
+        final String[] singleChoiceItems = getResources().getStringArray(R.array.week_list);
+        int itemSelected = 0;
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("周次选择")
+                .setSingleChoiceItems(singleChoiceItems, itemSelected, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        setStartDate(i);
+                        initWeekTitle(item);
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .show();
+    }
+    private void setStartDate(int i){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         Calendar cal = Calendar.getInstance();
         cal.setFirstDayOfWeek(Calendar.MONDAY);
-        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        cal.setMinimalDaysInFirstWeek(7);
-        cal.setTime(new Date());
-        return cal.get(Calendar.WEEK_OF_YEAR);
-    }*/
+        cal.add(Calendar.WEEK_OF_YEAR,-i);
+        Log.d(TAG, "setStartDate: "+cal.get(Calendar.DAY_OF_WEEK));
+        cal.add(Calendar.DAY_OF_YEAR,-cal.get(Calendar.DAY_OF_WEEK)+2);
+        editor.putInt("startYear",cal.get(Calendar.YEAR));
+        editor.putInt("startMonth",cal.get(Calendar.MONTH)+1);
+        editor.putInt("startDay",cal.get(Calendar.DAY_OF_MONTH));
+        editor.apply();
+    }
+    private int initWeekTitle(MenuItem item){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences.Editor editor =sharedPreferences.edit();
+        Calendar cal = Calendar.getInstance();
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+        LocalDate end = new LocalDate(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DAY_OF_MONTH));
+        Log.d(TAG, "initWeekTitle: end "+end.toString());
+        LocalDate start = new LocalDate(sharedPreferences.getInt("startYear",2017),sharedPreferences.getInt("startMonth",8),sharedPreferences.getInt("startDay",28
+        ));
+        Log.d(TAG, "initWeekTitle: start "+start.toString());
+
+
+        int weeks=Weeks.weeksBetween(start,end).getWeeks()+1;
+
+        item.setTitle("第"+weeks+"周");
+
+        editor.putInt("currentWeek",weeks);
+        editor.apply();
+
+        Log.d(TAG, "initWeekTitle: "+weeks);
+
+        return weeks;
+    }
+
+
 
 }
 

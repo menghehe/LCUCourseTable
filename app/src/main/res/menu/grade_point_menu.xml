@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/grade_point"
+        android:title="@string/grade_point"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/regular"
+        android:title="@string/rule"
+        app:showAsAction="never"/>
+</menu>

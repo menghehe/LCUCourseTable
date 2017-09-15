@@ -72,12 +72,22 @@ public class LeadActivity extends AppCompatActivity {
         Consumer<String> consumer= new Consumer<String>() {
             @Override
             public void accept(String mSession) throws Exception {
-                if (!mSession.equals("null")){
-                    session=mSession;
-                    getTable();
-                }else {
-                    progressDialog.dismiss();
-                    Toast.makeText(LeadActivity.this, "登陆失败,请重试", Toast.LENGTH_SHORT).show();
+
+                switch (mSession){
+                    case "passwordError":
+                        Toast.makeText(LeadActivity.this,"密码或者账号错误",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        break;
+                    case "null":
+                        Toast.makeText(LeadActivity.this,"登陆失败，重新登陆试试吧",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        break;
+                    default:
+                        session=mSession;
+                        getTable();
+                        progressDialog.dismiss();
+                        finish();
+                        break;
                 }
             }
         };
@@ -122,26 +132,25 @@ public class LeadActivity extends AppCompatActivity {
             ClassSchedule cs = new ClassSchedule();
 
             if(tdElement.size()==18&&!tdElement.get(13).text().equals(" ")){
-                cs.setName(tdElement.get(2).text());
-                cs.setTeacher(tdElement.get(7).text());
-                cs.setWeekList(tdElement.get(11).text());
+                cs.setName(tdElement.get(2).text().replace(" ",""));
+                cs.setTeacher(tdElement.get(7).text().replace("*","").replace(" ",""));
+                cs.setWeekList(formatWeekList(tdElement.get(11).text()));
                 cs.setWeek(strToInt(tdElement.get(12).text()));
                 cs.setOrder(strToInt(tdElement.get(13).text()));
                 cs.setSpan(strToInt(tdElement.get(14).text()));
-                cs.setLocation(tdElement.get(17).text());
+                cs.setLocation(tdElement.get(17).text().replace(" ",""));
                 cs.setFlag((int) (Math.random() * 10));
-                Log.d(TAG, "initData:"+cs.getWeekList());
                 course.add(cs);
             }
 
             if(tdElement.size()!=18&&!tdElement.get(0).text().equals(" ")){
-                cs.setName(course.get(course.size()-1).getName());
-                cs.setTeacher(course.get(course.size()-1).getTeacher());
-                cs.setWeekList(tdElement.get(0).text());
+                cs.setName(course.get(course.size()-1).getName().replace(" ",""));
+                cs.setTeacher(course.get(course.size()-1).getTeacher().replace("*","").replace(" ",""));
+                cs.setWeekList(formatWeekList(tdElement.get(0).text()));
                 cs.setWeek(strToInt(tdElement.get(1).text()));
                 cs.setOrder(strToInt(tdElement.get(2).text()));
                 cs.setSpan(strToInt(tdElement.get(3).text()));
-                cs.setLocation(tdElement.get(6).text());
+                cs.setLocation(tdElement.get(6).text().replace(" ",""));
                 cs.setFlag((int) (Math.random() * 10));
                 course.add(cs);
                 Log.d(TAG, "initData:"+cs.getWeekList());
@@ -158,11 +167,46 @@ public class LeadActivity extends AppCompatActivity {
         str=str.replace("  ","");
         str=str.replace(" ","");
         try{
-            int number  = Integer.valueOf(str);
-            return number;
+           return Integer.valueOf(str);
         }catch (NumberFormatException e){
             return 0;
         }
+
+    }
+    private String formatWeekList(String string){
+
+        String weekList="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,";
+
+
+
+        if (string.contains("周上")&&string.contains(",")){
+            weekList = string.replace("周上",",");
+        }
+
+        if (string.contains("-")){
+
+            weekList = "";
+            string = string.replace("周上","");
+            string = string.replace("周","");
+
+            String a[] = string.split("[-]");
+
+            for (int i=strToInt(a[0]);i<=strToInt(a[1]);i++){
+                    weekList +=i+",";
+            }
+
+
+        }
+
+
+        if (string.contains("3周上")){
+            weekList ="3,";
+        }
+        weekList=weekList.replace(" ","");
+        weekList=weekList.replace(" ","");
+        weekList = ","+weekList;
+        Log.d(TAG, "formatWeekList: "+weekList);
+        return weekList;
 
     }
     private void showProgress(){
@@ -173,33 +217,4 @@ public class LeadActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
-   /*private String generateWeekList(String str){
-
-        String  st1="  1,3,5,7,9,11,13,15,17周上";
-        String  st2="  1-18周上";
-        String  st3="  2,4,6,8,10,12,14,16周上";
-        String  st4="  1-16周上";
-        String  st5="  1-20周";
-        String  st6="  3-16周上";
-
-        if (str.equals(st1)){
-            return "1,3,5,7,9,11,13,15,17,";
-        }
-        if (str.equals(st2)){
-            return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,";
-        }
-        if (str.equals(st3)){
-            return "2,4,6,8,10,12,14,16,";
-        }
-        if (str.equals(st4)){
-            return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,";
-        }
-        if (str.equals(st5)){
-            return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,";
-        }
-        if (str.equals(st6)){
-            return "3,4,5,6,7,8,9,10,11,12,13,14,15,16,";
-        }
-        return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,";
-    }*/
 }

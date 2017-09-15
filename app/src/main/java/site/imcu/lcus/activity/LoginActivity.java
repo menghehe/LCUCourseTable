@@ -6,11 +6,16 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+import com.bilibili.magicasakura.widgets.TintProgressDialog;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -33,10 +38,29 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setToolBar();
-        restorePass();
         setLoginListener();
+        restorePass();
     }
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            enableLoginBtn();
+        }
+    };
+    private void enableLoginBtn() {
+        Button login = (Button)findViewById(R.id.login_btn);
+        login.setEnabled(accountEdit.getText().length() == 10 && passwordEdit.getText().length() != 0);
+    }
     private void setLoginListener(){
         Button login = (Button)findViewById(R.id.login_btn);
         login.setOnClickListener(new View.OnClickListener() {
@@ -59,13 +83,21 @@ public class LoginActivity extends AppCompatActivity {
         Consumer<String> consumer= new Consumer<String>() {
             @Override
             public void accept(String session) throws Exception {
-                if (!session.equals("null")){
-                    Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    finish();
-                }else {
-                    Toast.makeText(LoginActivity.this,"登陆失败",Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+
+                switch (session){
+                    case "passwordError":
+                        Toast.makeText(LoginActivity.this,"密码或者账号错误",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        break;
+                    case "null":
+                        Toast.makeText(LoginActivity.this,"登陆失败，重新登陆试试吧",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        break;
+                    default:
+                        Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        finish();
+                        break;
                 }
             }
         };
@@ -87,6 +119,8 @@ public class LoginActivity extends AppCompatActivity {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         accountEdit = (EditText)findViewById(R.id.username);
         passwordEdit=(EditText)findViewById(R.id.password);
+        accountEdit.addTextChangedListener(textWatcher);
+        passwordEdit.addTextChangedListener(textWatcher);
         String account = pref.getString("account","");
         String password = pref.getString("password","");
         accountEdit.setText(account);
@@ -103,4 +137,5 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
+
 }

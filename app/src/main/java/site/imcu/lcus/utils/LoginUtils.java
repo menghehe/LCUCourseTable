@@ -13,6 +13,7 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.List;
 
@@ -29,55 +30,63 @@ import okhttp3.Response;
  */
 
 public class LoginUtils {
-        public static String login(String account ,String password) {
-            try {
-                String session;
-                OkHttpClient client = new OkHttpClient();
-                Request requestYzm = new Request.Builder().url("http://jwcweb.lcu.edu.cn/validateCodeAction.do").build();
-                Response response = client.newCall(requestYzm).execute();
-                byte[] pic = response.body().bytes();
-                Bitmap bitmap = BitmapFactory.decodeByteArray(pic, 0, pic.length);
+    public static String login(String account ,String password) {
+        try {
+            String session;
+            OkHttpClient client = new OkHttpClient();
+            Request requestYzm = new Request.Builder().url("http://jwcweb.lcu.edu.cn/validateCodeAction.do").build();
+            Response response = client.newCall(requestYzm).execute();
+            byte[] pic = response.body().bytes();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(pic, 0, pic.length);
 
-                TessBaseAPI baseApi = new TessBaseAPI();
-                baseApi.init("/data/data/site.imcu.lcus/", "urp");
-                baseApi.setPageSegMode(TessBaseAPI.PageSegMode.PSM_SINGLE_LINE);
-                Pix pix = ReadFile.readBitmap(bitmap);
-                pix = Binarize.sauvolaBinarizeTiled(pix);
-                Bitmap after = WriteFile.writeBitmap(pix);
-                baseApi.setImage(after);
-                String yzm = baseApi.getUTF8Text().replace(" ", "");
+            TessBaseAPI baseApi = new TessBaseAPI();
+            baseApi.init("/data/data/site.imcu.lcus/", "urp");
+            baseApi.setPageSegMode(TessBaseAPI.PageSegMode.PSM_SINGLE_LINE);
+            Pix pix = ReadFile.readBitmap(bitmap);
+            pix = Binarize.sauvolaBinarizeTiled(pix);
+            Bitmap after = WriteFile.writeBitmap(pix);
+            baseApi.setImage(after);
+            String yzm = baseApi.getUTF8Text().replace(" ", "");
 
-                Headers headers = response.headers();
-                List<String> cookies = headers.values("Set-Cookie");
-                Log.d("info_cookies", "onResponse-size: " + cookies);
-                session = cookies.get(0);
-                session = session.substring(0, session.indexOf(";"));
+            if (yzm.length() != 4) {
+                login(account, password);
+            }
 
-                RequestBody body = new FormBody.Builder()
-                        .add("zjh",account)
-                        .add("mm", password)
-                        .add("v_yzm", yzm)
-                        .build();
-                Request request = new Request.Builder()
-                        .url("http://jwcweb.lcu.edu.cn/loginAction.do")
-                        .addHeader("cookie", session)
-                        .post(body)
-                        .build();
-                Response responseLogin = client.newCall(request).execute();
+            Headers headers = response.headers();
+            List<String> cookies = headers.values("Set-Cookie");
+            Log.d("info_cookies", "onResponse-size: " + cookies);
+            session = cookies.get(0);
+            session = session.substring(0, session.indexOf(";"));
 
-                String responseData = responseLogin.body().string();
-                Document document = Jsoup.parse(responseData);
-                Element element = document.select("title").first();
-                if (element.text().equals("学分制综合教务")) {
-                    return session;
-                } else {
-                    return "null";
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            RequestBody body = new FormBody.Builder()
+                    .add("zjh", account)
+                    .add("mm", password)
+                    .add("v_yzm", yzm)
+                    .build();
+            Request request = new Request.Builder()
+                    .url("http://jwcweb.lcu.edu.cn/loginAction.do")
+                    .addHeader("cookie", session)
+                    .post(body)
+                    .build();
+            Response responseLogin = client.newCall(request).execute();
+
+            String responseData = responseLogin.body().string();
+
+            if (responseData.contains("密码不正确")) {
+                return "passwordError";
+            }
+            Document document = Jsoup.parse(responseData);
+            Element element = document.select("title").first();
+            if (element.text().equals("学分制综合教务")) {
+                return session;
+            } else {
                 return "null";
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "null";
         }
+    }
 
         public static String getData(String session, String url){
             try {

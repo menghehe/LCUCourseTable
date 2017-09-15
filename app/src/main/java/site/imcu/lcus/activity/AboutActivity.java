@@ -34,23 +34,23 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         LinearLayout tess = (LinearLayout) findViewById(R.id.tess);
         LinearLayout urp= (LinearLayout) findViewById(R.id.urp);
 
-        LinearLayout jsoup = (LinearLayout) findViewById(R.id.jsoup);
-        LinearLayout litepal = (LinearLayout) findViewById(R.id.litepal);
+        LinearLayout js = (LinearLayout) findViewById(R.id.jsoup);
+        LinearLayout SQL = (LinearLayout) findViewById(R.id.litepal);
         LinearLayout md = (LinearLayout) findViewById(R.id.md);
-        LinearLayout whell = (LinearLayout) findViewById(R.id.whell);
+        LinearLayout wheel = (LinearLayout) findViewById(R.id.whell);
         LinearLayout square= (LinearLayout) findViewById(R.id.square);
-        LinearLayout coursetable = (LinearLayout) findViewById(R.id.coursetable);
+        LinearLayout courseTable = (LinearLayout) findViewById(R.id.coursetable);
         ScrollView scroll_about = (ScrollView) findViewById(R.id.scroll_about);
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim_about_card_show);
         scroll_about.startAnimation(animation);
 
-        jsoup.setOnClickListener(this);
-        litepal.setOnClickListener(this);
+        js.setOnClickListener(this);
+        SQL.setOnClickListener(this);
         md.setOnClickListener(this);
-        whell.setOnClickListener(this);
+        wheel.setOnClickListener(this);
         square.setOnClickListener(this);
-        coursetable.setOnClickListener(this);
+        courseTable.setOnClickListener(this);
         urp.setOnClickListener(this);
         tess.setOnClickListener(this);
         gitAddress.setOnClickListener(this);

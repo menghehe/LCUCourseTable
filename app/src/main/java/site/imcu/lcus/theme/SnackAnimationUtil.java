@@ -32,10 +32,10 @@ public class SnackAnimationUtil {
         return this;
     }
 
-    public SnackAnimationUtil setDismissDelayCallback(SnackAnimationCallback snackAnimationCallback){
+    /*public SnackAnimationUtil setDismissDelayCallback(SnackAnimationCallback snackAnimationCallback){
         mSnackAnimationCallback = snackAnimationCallback;
         return this;
-    }
+    }*/
 
     public void play() {
         if (mTargetView == null || mSnackInAnim == null || mSnackOutAnim == null) {

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">聊大课表</string>
-    <string name="login_get">登陆</string>
     <string name="add_course">添加课程</string>
     <string name="edit_course">编辑</string>
     <string name="score_read">成绩查询</string>
@@ -12,10 +11,9 @@
 
     <!-- String related to Login -->
 
-    <string name="title_activity_login">Login</string>
     <string name="login_user_name_hint">教务系统账号</string>
     <string name="login_user_name_password">密码</string>
-    <string name="login_action">登陆</string>
+    <string name="login_action">登录</string>
     <string name="login_tip1">其他功能依赖在此登陆的账号</string>
     <string name="login_tip2">若登陆失败请重试或者检查账号</string>
 
@@ -38,7 +36,7 @@
     <string name="lead_tip">该操作会清空当前课程表</string>
 
     <!-- String related to about -->
-    <string name="about_card2_title">感谢以下开源库</string>
+    <string name="about_card2_title">感谢以下开源库(可能有遗漏)</string>
     <string name="eajy">Eajy/MaterialDesignDemo</string>
     <string name="whuajian">WHuaJian/CourseTable</string>
     <string name="jhy">jhy/jsoup</string>
@@ -56,15 +54,15 @@
     <string name="theme_title">主题选择</string>
     <string name="theme_confirm">确认</string>
     <string name="theme_cancel">取消</string>
-    
+
     <!-- String related to menu -->
 
     <string name="save">保存</string>
     <string name="delete">删除</string>
-    
+
     <string name="point">绩点计算</string>
     <string name="rule">计算规则</string>
-    
+
     <string name="account">教务账号</string>
     <string name="lead">从教务系统导入</string>
     <string name="hand">手动添加</string>
@@ -72,5 +70,14 @@
     <string name="upData">检查更新</string>
     <string name="about">关于</string>
     <string name="choose_theme">主题选择</string>
+
+    <string name="course_attr">课程属性:</string>
+    <string name="course_position">班级名次:</string>
+    <string name="course_credit">课程学分:</string>
+
+    <string name="grade_point">绩点计算</string>
+    <string name="point_rule">计算规则</string>
+
+    <string name="current_week">week</string>
 
 </resources>

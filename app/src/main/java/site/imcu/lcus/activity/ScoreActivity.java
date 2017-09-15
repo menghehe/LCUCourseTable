@@ -37,9 +37,7 @@ public class ScoreActivity extends AppCompatActivity {
         setToolBar();
         login();
         login_btn();
-        if (!session.equals("null")){
-            setButton();
-        }
+
     }
 
 
@@ -93,12 +91,21 @@ public class ScoreActivity extends AppCompatActivity {
         Consumer<String> consumer= new Consumer<String>() {
             @Override
             public void accept(String mSession) throws Exception {
-                if (!mSession.equals("null")){
-                    session=mSession;
-                    progressDialog.dismiss();
-                }else {
-                    Toast.makeText(ScoreActivity.this,"登陆失败，刷新试试吧 ",Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                switch (mSession){
+                    case "passwordError":
+                        Toast.makeText(ScoreActivity.this,"密码或者账号错误",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        break;
+                    case "null":
+                        Toast.makeText(ScoreActivity.this,"登陆失败，重新登陆试试吧",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        break;
+                    default:
+                        Toast.makeText(ScoreActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        session=mSession;
+                        setButton();
+                        break;
                 }
             }
         };
@@ -115,7 +122,7 @@ public class ScoreActivity extends AppCompatActivity {
         progressDialog.setTitle("登陆中");
         progressDialog.setMessage("请稍等");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(true);
+        progressDialog.setCancelable(false);
         progressDialog.show();
     }
 

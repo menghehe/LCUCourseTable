@@ -87,24 +87,8 @@
                 app:backgroundTint="@color/selector_focus"
                 app:drawableLeftTint="@color/selector_focus"/>
 
-            <com.bilibili.magicasakura.widgets.TintEditText
-                android:id="@+id/edit_weekList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/edit_week_list"
-                android:inputType="text"
-                android:maxLines="1"
-                android:background="@drawable/ic_edit_text_default"
-                android:drawableLeft="@drawable/week_list"
-                android:drawablePadding="@dimen/padding_half"
-                android:padding="@dimen/padding_half"
-                android:textCursorDrawable="@drawable/edit_text_cursor"
-                android:textSize="13sp"
-                app:backgroundTint="@color/selector_focus"
-                app:drawableLeftTint="@color/selector_focus"/>L
 
         </com.bilibili.magicasakura.widgets.TintLinearLayout>
-
 
     </com.bilibili.magicasakura.widgets.TintLinearLayout>
 
@@ -128,6 +112,274 @@
 
         card_view:cardElevation="1dp">
 
+        <com.bilibili.magicasakura.widgets.TintLinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.bilibili.magicasakura.widgets.TintLinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </com.bilibili.magicasakura.widgets.TintLinearLayout>
+
+            <com.bilibili.magicasakura.widgets.TintLinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="08"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox08"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </com.bilibili.magicasakura.widgets.TintLinearLayout>
+
+            <com.bilibili.magicasakura.widgets.TintLinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                android:text="20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/checkbox21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </com.bilibili.magicasakura.widgets.TintLinearLayout>
+
+            <com.bilibili.magicasakura.widgets.TintLinearLayout
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="全选"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/chose_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="单周"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/chose_single"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.bilibili.magicasakura.widgets.TintTextView
+                    android:text="双周"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <com.bilibili.magicasakura.widgets.TintCheckBox
+                    android:id="@+id/chose_double"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.bilibili.magicasakura.widgets.TintLinearLayout>
+
+        </com.bilibili.magicasakura.widgets.TintLinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="@dimen/main_card_margin_vertical"
+
+        android:layout_marginLeft="@dimen/main_card_margin_horizontal"
+
+        android:layout_marginRight="@dimen/main_card_margin_horizontal"
+
+        android:layout_marginTop="@dimen/main_card_margin_vertical"
+
+        card_view:cardCornerRadius="1dp"
+
+        card_view:cardElevation="1dp">
+
+
 
 
         <RelativeLayout
@@ -139,6 +391,7 @@
             android:background="?android:selectableItemBackgroundBorderless"
 
             android:clickable="true">
+
 
 
 

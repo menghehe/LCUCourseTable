@@ -23,15 +23,14 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/login_get" />
+            android:label="@string/login_action" />
         <activity
             android:name=".activity.AddActivity"
             android:label="@string/add_course" />
         <activity
             android:name=".activity.EditActivity"
             android:label="@string/edit_course" />
-        <activity
-            android:name=".activity.AboutActivity"/>
+        <activity android:name=".activity.AboutActivity" />
         <activity
             android:name=".activity.ScoreActivity"
             android:label="@string/score_read" />
@@ -40,13 +39,14 @@
             android:label="@string/course_lead" />
         <activity
             android:name=".score.Score_This_Activity"
-            android:label="@string/score_this"/>
+            android:label="@string/score_this" />
         <activity
             android:name=".score.Score_Fail_Activity"
-            android:label="@string/score_fail"/>
+            android:label="@string/score_fail" />
         <activity
             android:name=".score.Score_All_Activity"
-            android:label="@string/score_all"/>
+            android:label="@string/score_all" />
+        <activity android:name=".score.Score_Detail_Activity"/>
     </application>
 
 </manifest>

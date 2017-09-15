@@ -1,5 +1,6 @@
 package site.imcu.lcus.score;
 
+
 /**
  * Created by SHIELD_7 on 2017/8/8.
  *
@@ -11,9 +12,18 @@ class Score {
     private String courseAttr;
     private String mark;
     private String position;
+    private String detail;
 
     String getCourseName() {
         return courseName;
+    }
+
+    String getDetail() {
+        return detail;
+    }
+
+    void setDetail(String detail) {
+        this.detail = detail;
     }
 
     void setCourseName(String courseName) {
@@ -51,4 +61,6 @@ class Score {
     void setPosition(String position) {
         this.position = position;
     }
+
+
 }

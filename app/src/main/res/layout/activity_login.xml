@@ -65,7 +65,7 @@
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/selector_login"
-                android:enabled="true"
+                android:enabled="false"
                 android:gravity="center"
                 android:textSize="@dimen/textsize_large" />
 
@@ -169,7 +169,6 @@
 
             </android.support.v7.widget.CardView>
         </com.bilibili.magicasakura.widgets.TintLinearLayout>
-
 
     </com.bilibili.magicasakura.widgets.TintLinearLayout>
 
