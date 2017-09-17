@@ -56,6 +56,7 @@ public class AddActivity extends AppCompatActivity {
         classSchedule.setOrder(getNub(1));
         classSchedule.setSpan(getNub(2)-getNub(1)+1);
         classSchedule.setFlag((int) (Math.random() * 10));
+        classSchedule.setWeekList(",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,");
         if (checkData(classSchedule)){
             classSchedule.save();
             Toast.makeText(AddActivity.this,"添加成功，请返回主界面后手动刷新",Toast.LENGTH_SHORT).show();
